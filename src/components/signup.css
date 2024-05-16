@@ -263,3 +263,8 @@ body {
 .container.active .toggle-right {
   transform: translateX(200%);
 }
+
+.error-message {
+  color: red;
+  font-size: 14px;
+}
