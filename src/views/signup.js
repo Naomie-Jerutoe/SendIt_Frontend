@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import "./signup.css";
 import { FaGooglePlusG, FaFacebookF, FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import "./signup.css";
 
 const SignUp = () => {
   const [isSignUp, setIsSignUp] = useState(false);
