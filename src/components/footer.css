@@ -117,13 +117,13 @@
   align-items: flex-start;
   flex-direction: column;
 }
-.footer-text3 {
+.footer-text5 {
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
   margin-bottom: var(--dl-space-space-threeunits);
 }
-.footer-text6 {
+.footer-text8 {
   margin-bottom: 0px;
 }
 @media(max-width: 1200px) {
@@ -158,7 +158,7 @@
   .footer-container3 {
     width: 100%;
   }
-  .footer-text3 {
+  .footer-text5 {
     margin-bottom: var(--dl-space-space-twounits);
   }
 }

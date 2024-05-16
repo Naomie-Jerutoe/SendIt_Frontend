@@ -50,14 +50,15 @@ const Footer = (props) => {
               About
             </Link>
             <Link to="/about-page" className="footer-navlink2 footer-link">
-              Features
+              <span>Services</span>
+              <br></br>
             </Link>
           </div>
           <div className="footer-container3">
-            <span className="footer-text3">Resources</span>
+            <span className="footer-text5">Resources</span>
             <span className="footer-link">Download SEND IT</span>
             <span className="footer-link">iOS Version</span>
-            <span className="footer-text6 footer-link">Android Version</span>
+            <span className="footer-text8 footer-link">Android Version</span>
           </div>
         </div>
       </div>

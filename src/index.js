@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom'
 
 import './style.css'
+import Services from './views/services'
 import AboutPage from './views/about-page'
 import ContactUs from './views/contact-us'
 import Home from './views/home'
@@ -17,6 +18,7 @@ const App = () => {
   return (
     <Router>
       <Switch>
+        <Route component={Services} exact path="/services" />
         <Route component={AboutPage} exact path="/about-page" />
         <Route component={ContactUs} exact path="/contact-us" />
         <Route component={Home} exact path="/" />

@@ -13,8 +13,8 @@ const Home = (props) => {
   return (
     <div className="home-container">
       <Helmet>
-        <title>Send IT App</title>
-        <meta property="og:title" content="Send IT App" />
+        <title>SendIT App</title>
+        <meta property="og:title" content="SendIT App" />
       </Helmet>
       <Navbar></Navbar>
       <main className="home-main">

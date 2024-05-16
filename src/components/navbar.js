@@ -8,7 +8,10 @@ import './navbar.css'
 const Navbar = (props) => {
   return (
     <div className={`navbar-navbar-container ${props.rootClassName} `}>
-      <header data-role="Header" className="navigation-container">
+      <header
+        data-role="Header"
+        className="navbar-max-width navigation-container"
+      >
         <img alt={props.imageAlt} src={props.text6} className="navbar-image" />
         <div className="navbar-nav">
           <NavigationLinks

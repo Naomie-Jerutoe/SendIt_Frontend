@@ -186,7 +186,6 @@
   fill: var(--dl-color-backgrounds-primary);
   cursor: pointer;
 }
-
 @media(max-width: 1200px) {
   .navbar1-text {
     fill: var(--dl-color-grays-black100);

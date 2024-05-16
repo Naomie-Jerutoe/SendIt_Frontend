@@ -11,11 +11,11 @@ const ContactUs = (props) => {
   return (
     <div className="contact-us-container">
       <Helmet>
-        <title>ContactUs - Send IT App</title>
-        <meta property="og:title" content="ContactUs - Send IT App" />
+        <title>ContactUs - SendIT App</title>
+        <meta property="og:title" content="ContactUs - SendIT App" />
       </Helmet>
-      <div className="contact-us-navbar">
-        <Navbar rootClassName="navbar-root-class-name"></Navbar>
+      <div className="contact-us-navbar1">
+        <Navbar rootClassName="navbar-root-class-name2"></Navbar>
       </div>
       <div className="contact-us-contactform2">
         <ContactForm7></ContactForm7>
