@@ -1,6 +1,8 @@
 .footer-footer {
+  padding-top: var(--dl-space-space-twounits);
   border-color: rgba(33, 33, 33, 0.1);
   border-width: 1px;
+  padding-bottom: var(--dl-space-space-twounits);
   border-top-width: 0px;
   border-left-width: 0px;
   border-right-width: 0px;
@@ -126,6 +128,7 @@
 .footer-text8 {
   margin-bottom: 0px;
 }
+
 @media(max-width: 1200px) {
   .footer-image {
     width: 148px;

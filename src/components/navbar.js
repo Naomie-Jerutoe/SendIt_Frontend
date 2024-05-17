@@ -13,7 +13,13 @@ const Navbar = (props) => {
         data-role="Header"
         className="navbar-max-width navigation-container"
       >
-        <img alt={props.imageAlt} src={props.text6} className="navbar-image" />
+        <Link to="/" className="">
+          <img
+            alt={props.imageAlt}
+            src={props.text6}
+            className="navbar-image"
+          />
+        </Link>
         <div className="navbar-nav">
           <NavigationLinks
             rootClassName="navigation-links-root-class-name10"
@@ -46,7 +52,10 @@ const Navbar = (props) => {
             </ul>
           </div>
         </div>
-        <div data-role="BurgerMenu" className="navigation-burger-menu">
+        <div
+          data-role="BurgerMenu"
+          className="navigation-burger-menu navbar-burger-menu"
+        >
           <svg viewBox="0 0 1024 1024" className="navbar-icon">
             <path
               d="M128 554.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 298.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 810.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"
@@ -71,9 +80,12 @@ const Navbar = (props) => {
                 </svg>
               </div>
             </div>
-            <button className="navbar-primary-btn button-primary button">
+            <Link
+              to="/signup"
+              className="navbar-primary-btn button-primary button"
+            >
               {props.primaryBtn1}
-            </button>
+            </Link>
             <NavigationLinks
               rootClassName="navigation-links-root-class-name11"
               className=""

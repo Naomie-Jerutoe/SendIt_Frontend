@@ -9,6 +9,7 @@ import {
 
 import './style.css'
 import Services from './views/services'
+import UserDashboard from './views/user-dashboard'
 import AboutPage from './views/about-page'
 import ContactUs from './views/contact-us'
 import Signup from './views/signup'
@@ -20,6 +21,7 @@ const App = () => {
     <Router>
       <Switch>
         <Route component={Services} exact path="/services" />
+        <Route component={UserDashboard} exact path="/user-dashboard" />
         <Route component={AboutPage} exact path="/about-page" />
         <Route component={ContactUs} exact path="/contact-us" />
         <Route component={Signup} exact path="/signup" />
