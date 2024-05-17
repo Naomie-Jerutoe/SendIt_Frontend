@@ -12,6 +12,8 @@ import AboutPage from './views/about-page'
 import ContactUs from './views/contact-us'
 import Home from './views/home'
 import NotFound from './views/not-found'
+import MapWithGeocoding from './components/MapWithGeocoding';
+import GoogleMapsPage from './components/GoogleMapsPage';
 
 const App = () => {
   return (
@@ -20,6 +22,8 @@ const App = () => {
         <Route component={AboutPage} exact path="/about-page" />
         <Route component={ContactUs} exact path="/contact-us" />
         <Route component={Home} exact path="/" />
+        <Route component={MapWithGeocoding} exact path="/map" />
+        <Route component={GoogleMapsPage} exact path="/maps" />
         <Route component={NotFound} path="**" />
         <Redirect to="**" />
       </Switch>
