@@ -268,3 +268,21 @@ body {
   color: red;
   font-size: 12px;
 }
+
+.password-input-container {
+  position: relative;
+  width: 100%;
+}
+
+.password-input-container input {
+  padding-right: 40px; /* Make space for the show password button */
+}
+
+.show-password-btn {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #666;
+}
