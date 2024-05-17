@@ -1,10 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './calculator.css';
 
 const PriceCalculatorForm = ({ isOpen, onClose }) => {
   const [distance, setDistance] = useState('');
   const [fragility, setFragility] = useState('');
   const [estimatedPrice, setEstimatedPrice] = useState(null);
+  const modalOverlayRef = React.useRef(null);
+
+  useEffect(() => {
+    const modalOverlay = modalOverlayRef.current;
+
+    if (modalOverlay) {
+      if (isOpen) {
+        modalOverlay.classList.add('open');
+      } else {
+        modalOverlay.classList.remove('open');
+      }
+    }
+  }, [isOpen]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -50,20 +63,22 @@ const PriceCalculatorForm = ({ isOpen, onClose }) => {
         <span className="price-calculator-close" onClick={onClose}>
           &times;
         </span>
-        <h2>Get A Quote:</h2>
+        <h2>Get A Quote:</h2><br />
         <form onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="distance">What is the distance? (in km):</label><br />
+            <label htmlFor="distance">What is the distance? (in km):</label><br /><br />
             <input
               type="number"
               id="distance"
+              // placeholder="how far is it?"
               value={distance}
               onChange={(e) => setDistance(e.target.value)}
               required
             />
           </div>
+          <br />
           <div>
-            <label htmlFor="fragility">How fragile are the items?</label><br />
+            <label htmlFor="fragility">How fragile are the items?</label><br /><br />
             <select
               id="fragility"
               value={fragility}
@@ -76,16 +91,16 @@ const PriceCalculatorForm = ({ isOpen, onClose }) => {
               <option value="high">High (Glass) </option>
             </select>
           </div>
-          <br /> <br /><br /><br />
+          <br /> <br />
 
           <button type="submit" className="calculate-button">Calculate Price</button>
           <br /><br /><br />
-        </form>
-        {estimatedPrice !== null && (
-          <div>
-            <p>Estimated Price: {estimatedPrice}</p>
+          {estimatedPrice !== null && (
+          <div className="estimated-price">
+            <p>Estimated Price: {estimatedPrice} Ksh</p>
           </div>
         )}
+        </form>
       </div>
     </div>
   );
