@@ -1,0 +1,31 @@
+.delivery-order-summary-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: var(--dl-color-backgrounds-gray);
+  padding: var(--dl-space-space-threeunits);
+}
+
+.delivery-order-summary-container h2 {
+  text-align: center;
+  margin-bottom: var(--dl-space-space-twounits);
+}
+
+.delivery-order-summary-container div {
+  width: 100%;
+  max-width: 600px;
+  background-color: var(--dl-color-grays-white100);
+  padding: var(--dl-space-space-unit);
+  border-radius: 4px;
+  margin-bottom: var(--dl-space-space-unit);
+}
+
+.delivery-order-summary-container div h3 {
+  margin-bottom: var(--dl-space-space-halfunit);
+}
+
+.delivery-order-summary-container div p {
+  margin: 0;
+}
