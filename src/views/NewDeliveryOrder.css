@@ -38,6 +38,12 @@
   padding: var(--dl-space-space-halfunit);
   border: 1px solid var(--dl-color-grays-gray40);
   border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.new-delivery-order-container form input:hover,
+.new-delivery-order-container form textarea:hover {
+  background-color: rgba(172, 105, 248, 0.35);
 }
 
 .new-delivery-order-container form button {
@@ -52,4 +58,9 @@
 
 .new-delivery-order-container form button:hover {
   background-color: var(--dl-color-grays-dark100);
+}
+
+.weight-description{
+  font-style: italic;
+  color: gray;
 }
