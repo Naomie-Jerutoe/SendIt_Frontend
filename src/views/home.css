@@ -184,22 +184,6 @@
   align-items: flex-start;
   flex-direction: row;
 }
-.home-icon08 {
-  width: 24px;
-  height: 24px;
-}
-.home-icon10 {
-  width: 24px;
-  height: 24px;
-}
-.home-icon12 {
-  width: 24px;
-  height: 24px;
-}
-.home-icon14 {
-  width: 24px;
-  height: 24px;
-}
 .home-section-four {
   padding-bottom: 0px;
 }
@@ -302,7 +286,7 @@
   padding-right: var(--dl-space-space-oneandhalfunits);
   padding-bottom: var(--dl-space-space-unit);
 }
-.home-icon16 {
+.home-icon08 {
   width: 24px;
   height: 24px;
 }
@@ -344,7 +328,7 @@
   margin-bottom: 20px;
   flex-direction: row;
 }
-.home-icon18 {
+.home-icon10 {
   fill: var(--dl-color-grays-white100);
   width: 17px;
   height: 17px;
@@ -365,7 +349,7 @@
   margin-bottom: 20px;
   flex-direction: row;
 }
-.home-icon20 {
+.home-icon12 {
   fill: var(--dl-color-grays-white100);
   width: 17px;
   height: 17px;
@@ -385,7 +369,7 @@
   align-items: center;
   flex-direction: row;
 }
-.home-icon22 {
+.home-icon14 {
   fill: var(--dl-color-grays-white100);
   width: 17px;
   height: 17px;

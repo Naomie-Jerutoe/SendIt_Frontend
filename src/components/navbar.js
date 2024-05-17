@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import PropTypes from 'prop-types'
 
@@ -121,9 +122,12 @@ const Navbar = (props) => {
             </div>
           </div>
         </div>
-        <button className="button-primary button navbar-primary-btn1">
+        <Link
+          to="/signup"
+          className="navbar-primary-btn1 button-primary button"
+        >
           Log In/ Sign Up
-        </button>
+        </Link>
       </header>
     </div>
   )
