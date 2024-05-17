@@ -110,6 +110,20 @@ body {
   z-index: 1;
 }
 
+.signup {
+  transition: all 0.3s ease;
+}
+
+.signup:hover {
+  background-color: #fff;
+  color: #7d30fa;
+  border-color: #7d30fa;
+}
+
+.reset:hover {
+  color: #7d30fa;
+}
+
 .container.active .sign-up {
   transform: translateX(100%);
   opacity: 1;
@@ -148,37 +162,40 @@ body {
   background-color: #edeff4;
 }
 
-.social-icons a#facebook:hover {
+#facebook:hover {
   background-color: #3b5998;
+  color: #fff;
 }
 
-.social-icons a#google:hover {
-  background-color: #dd4b39;
+#google:hover {
+  background: #ea4335;
+  color: #fff;
 }
 
-.social-icons a#linkedin:hover {
+#linkedin:hover {
   background-color: #0077b5;
+  color: #fff;
 }
 
-.social-icons a#github:hover {
+#github:hover {
   background-color: #333;
+  color: #fff;
 }
 
-/* Initial styling for individual social media icons */
 #facebook {
-  color: #0077b5; /* Facebook blue */
+  color: #3b5998;
 }
 
 #google {
-  color: #dd4b39; /* Google red */
+  color: #dd4b39;
 }
 
 #linkedin {
-  color: #0077b5; /* LinkedIn blue */
+  color: #0077b5;
 }
 
 #github {
-  color: #333; /* GitHub black */
+  color: #333;
 }
 
 .toggle-container {
@@ -245,4 +262,9 @@ body {
 
 .container.active .toggle-right {
   transform: translateX(200%);
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
 }
