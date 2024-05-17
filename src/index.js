@@ -12,7 +12,7 @@ import AboutPage from './views/about-page'
 import ContactUs from './views/contact-us'
 import Home from './views/home'
 import NotFound from './views/not-found'
-import Signup from './components/signup'
+
 
 const App = () => {
   return (
@@ -21,7 +21,6 @@ const App = () => {
         <Route component={AboutPage} exact path="/about-page" />
         <Route component={ContactUs} exact path="/contact-us" />
         <Route component={Home} exact path="/" />
-        <Route component={Signup} path="/signup" />
         <Route component={NotFound} path="**" />
         <Redirect to="**" />
       </Switch>
