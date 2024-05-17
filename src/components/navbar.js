@@ -119,9 +119,9 @@ const Navbar = (props) => {
             </div>
           </div>
         </div>
-        <button className="button-primary button navbar-primary-btn1">
-          <Link to="/signup">Log In/ Sign Up</Link>
-        </button>
+        
+          <Link to="/signup"> <button className="button-primary button navbar-primary-btn1">Login / Sign Up</button></Link>
+        
       </header>
     </div>
   );

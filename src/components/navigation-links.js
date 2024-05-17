@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import './navigation-links.css'
 import NewDeliveryOrder from '../views/NewDeliveryOrder';
 import DeliveryOrderSummary from '../views/DeliveryOrderSummary';
+import SignUp from '../views/signup';
 
 const NavigationLinks = (props) => {
   return (

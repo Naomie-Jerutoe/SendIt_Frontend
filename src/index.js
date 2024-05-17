@@ -14,6 +14,7 @@ import Home from './views/home'
 import NotFound from './views/not-found'
 import NewDeliveryOrder from './views/NewDeliveryOrder';
 import DeliveryOrderSummary from './views/DeliveryOrderSummary';
+import SignUp from './views/signup';
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
         <Route component={Home} exact path="/" />
         <Route component={NewDeliveryOrder} exact path="/new-delivery-order" />
         <Route component={DeliveryOrderSummary} exact path="/delivery-order-summary" />
+        <Route component={SignUp} exact path="/signup" />
         <Route component={NotFound} path="**" />
         <Redirect to="**" />
       </Switch>

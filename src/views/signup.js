@@ -38,6 +38,27 @@ const SignUp = () => {
     onSubmit: (values) => {
       console.log(values);
       // Add your form submission logic here
+      const handleSubmit = (values)=>{
+        fetch('https://sendit-backend-qhth.onrender.com/signup', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            username: values.name,
+            email: values.email,
+            password: values.password,
+            is_admin: false
+          })
+        }).
+        then(response = response.json()).
+        then(data = console.log(data)).
+        catch(err=>console.error(err))
+        signUpFormik.values.name = ''
+        signUpFormik.values.email = ''
+        signUpFormik.values.password = ''
+      }
+      handleSubmit(values)      
     },
   });
 
@@ -50,6 +71,7 @@ const SignUp = () => {
     onSubmit: (values) => {
       console.log(values);
       // Add your form submission logic here
+
     },
   });
 

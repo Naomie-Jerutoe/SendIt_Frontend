@@ -1,25 +1,69 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import FloatingButton from '../components/floatingbutton';
 import Navbar from '../components/navbar';
 import Footer from '../components/footer';
 import './NewDeliveryOrder.css';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const NewDeliveryOrder = () => {
   const [formData, setFormData] = useState({
     customerName: '',
     deliveryAddress: '',
     items: '',
+    weight: '',
+    phoneNumber: '',
+    email: '',
   });
+
+  const[orderStatus, setOrderStatus] = useState('');
+  const history = useHistory();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission logic here
-    console.log(formData);
-  };
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    // Create a new parcel
+    const parcelResponse = await fetch('https://sendit-backend-qhth.onrender.com/parcels', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
+      },
+      body: JSON.stringify(formData),
+    });
+
+    if (parcelResponse.ok) {
+      const parcelData = await parcelResponse.json();
+      const parcelId = parcelData.id;
+
+      // Create a new order
+      const orderResponse = await fetch('https://sendit-backend-qhth.onrender.com/orders', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+        body: JSON.stringify({ parcelId, status: 'enroute' }),
+      });
+
+      if (orderResponse.ok) {
+        const orderData = await orderResponse.json();
+        setOrderStatus(orderData.status);
+        history.push('/delivery-order-summary', { parcelId, orderStatus: orderData.status });
+      } else {
+        console.error('Failed to create order');
+      }
+    } else {
+      console.error('Failed to create parcel');
+    }
+  } catch (error) {
+    console.error('An error occurred:', error);
+  }
+};
 
   const clearForm = () => {
     setFormData({

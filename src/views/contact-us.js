@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet'
 import Navbar from '../components/navbar'
 import ContactForm7 from '../components/contact-form7'
 import Footer from '../components/footer'
+import FloatingButton from '../components/floatingbutton';
 import './contact-us.css'
 
 const ContactUs = (props) => {
@@ -21,6 +22,7 @@ const ContactUs = (props) => {
         <ContactForm7></ContactForm7>
       </div>
       <Footer rootClassName="footer-root-class-name"></Footer>
+      <FloatingButton/>
     </div>
   )
 }
