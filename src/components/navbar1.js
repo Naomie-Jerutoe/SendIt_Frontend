@@ -120,7 +120,7 @@ const Navbar1 = (props) => {
 }
 
 Navbar1.defaultProps = {
-  primaryBtn1: 'Log In',
+  primaryBtn1: 'Log Out',
   rootClassName: '',
   imageAlt: 'logo',
   text6:
