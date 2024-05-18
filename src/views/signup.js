@@ -7,10 +7,18 @@ import {
   FaLinkedinIn,
   FaEyeSlash,
   FaEye,
+  FaSpinner,
 } from "react-icons/fa";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import zxcvbn from "zxcvbn";
 import "./signup.css";
+
+const Loader = () => (
+  <div className="loader-container">
+    <FaSpinner className="loader-spinner" />
+  </div>
+);
 
 const SignUp = (props) => {
   const history = useHistory();
@@ -19,6 +27,10 @@ const SignUp = (props) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showLoginPassword, setShowLoginPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [passwordStrength, setPasswordStrength] = useState(0);
+  const [passwordStrengthText, setPasswordStrengthText] = useState("");
+  const [passwordStrengthColor, setPasswordStrengthColor] = useState("red");
 
   const handleSignUpClick = () => {
     setIsSignUp(true);
@@ -38,6 +50,40 @@ const SignUp = (props) => {
 
   const handleShowLoginPassword = () => {
     setShowLoginPassword(!showLoginPassword);
+  };
+
+  const handlePasswordChange = (event) => {
+    const password = event.target.value;
+    signUpFormik.handleChange(event);
+
+    const result = zxcvbn(password);
+    setPasswordStrength(result.score);
+
+    switch (result.score) {
+      case 0:
+        setPasswordStrengthText("Too weak");
+        setPasswordStrengthColor("red");
+        break;
+      case 1:
+        setPasswordStrengthText("Weak");
+        setPasswordStrengthColor("orange");
+        break;
+      case 2:
+        setPasswordStrengthText("Fair");
+        setPasswordStrengthColor("yellow");
+        break;
+      case 3:
+        setPasswordStrengthText("Good");
+        setPasswordStrengthColor("lightgreen");
+        break;
+      case 4:
+        setPasswordStrengthText("Strong");
+        setPasswordStrengthColor("green");
+        break;
+      default:
+        setPasswordStrengthText("");
+        setPasswordStrengthColor("red");
+    }
   };
 
   const signUpSchema = Yup.object().shape({
@@ -69,8 +115,7 @@ const SignUp = (props) => {
     },
     validationSchema: signUpSchema,
     onSubmit: (values) => {
-      console.log(values);
-      // Add your form submission logic here
+      setIsLoading(true);
       const handleSubmit = (values) => {
         fetch("https://sendit-backend-qhth.onrender.com/signup", {
           method: "POST",
@@ -84,19 +129,35 @@ const SignUp = (props) => {
             is_admin: false,
           }),
         })
-          .then((response) => response.json())
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            } else if (response.status === 400 || response.status === 409) {
+              setIsSignUp(false);
+              throw new Error("User already exists");
+            } else {
+              throw new Error(`Sign up failed with status ${response.status}`);
+            }
+          })
           .then((data) => {
+            setIsLoading(false);
             if (data.success) {
               alert("Sign up successful");
-              // Navigate to the home page
               history.push("/");
             } else {
               console.error("Sign up failed:", data.message);
-              // Display an error message to the user
               alert(data.message);
             }
           })
-          .catch((err) => console.error(err));
+          .catch((err) => {
+            setIsLoading(false);
+            if (err.message === "User already exists") {
+              alert("User already exists. Please log in instead.");
+            } else {
+              console.error(err);
+              alert("An error occurred during sign up.");
+            }
+          });
         signUpFormik.resetForm();
       };
       handleSubmit(values);
@@ -110,8 +171,7 @@ const SignUp = (props) => {
     },
     validationSchema: signInSchema,
     onSubmit: (values) => {
-      console.log(values);
-      // Add your form submission logic here
+      setIsLoading(true);
       const handleLogin = (values) => {
         fetch("https://sendit-backend-qhth.onrender.com/login", {
           method: "POST",
@@ -125,27 +185,34 @@ const SignUp = (props) => {
         })
           .then((response) => response.json())
           .then((data) => {
+            setIsLoading(false);
             if (data.token) {
               console.log("Login successful");
               console.log("Token:", data.token);
-              // Store the token in localStorage or context/state management as needed
               localStorage.setItem("token", data.token);
-              // Navigate to the home page
               history.push("/");
             } else {
               console.error("Login failed:", data.message);
-              // Display an error message to the user
               alert(data.message);
             }
           })
-          .catch((err) => console.error("Error:", err));
+          .catch((err) => {
+            setIsLoading(false);
+            console.error("Error:", err);
+          });
       };
       handleLogin(values);
     },
   });
 
   return (
-    <div className={`container ${isSignUp ? "active" : ""}`} id="container">
+    <div
+      className={`container ${isSignUp ? "active" : ""} ${
+        isLoading ? "loading" : ""
+      }`}
+      id="container"
+    >
+      {isLoading && <Loader />}
       <div className={`form-container sign-up ${isSignUp ? "active" : ""}`}>
         <form onSubmit={signUpFormik.handleSubmit}>
           <h1>Create Account</h1>
@@ -163,7 +230,7 @@ const SignUp = (props) => {
               <FaLinkedinIn />
             </a>
           </div>
-          <span>or use your email for registeration</span>
+          <span>or use your email for registration</span>
           <input
             type="text"
             placeholder="Name"
@@ -178,7 +245,7 @@ const SignUp = (props) => {
           <input
             type="email"
             placeholder="Email"
-            id="email"
+            className="email"
             name="email"
             onChange={signUpFormik.handleChange}
             value={signUpFormik.values.email}
@@ -190,16 +257,30 @@ const SignUp = (props) => {
             <input
               type={showPassword ? "text" : "password"}
               placeholder="Password"
-              id="password"
+              className="password"
               name="password"
-              onChange={signUpFormik.handleChange}
+              onChange={handlePasswordChange}
               value={signUpFormik.values.password}
             />
             <span className="show-password-btn" onClick={handleShowPassword}>
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </span>
           </div>
-
+          <div className="password-strength-indicator">
+            <div
+              className={`strength-bar strength-${passwordStrength}`}
+              style={{ width: `${(passwordStrength / 4) * 100}%` }}
+            ></div>
+            <span
+              className="strength-text"
+              style={{ color: passwordStrengthColor }}
+            >
+              {passwordStrengthText}
+            </span>
+          </div>
+          {signUpFormik.errors.password && (
+            <div className="error-message">{signUpFormik.errors.password}</div>
+          )}
           <div className="password-input-container">
             <input
               type={showConfirmPassword ? "text" : "password"}
@@ -247,7 +328,7 @@ const SignUp = (props) => {
           <input
             type="email"
             placeholder="Email"
-            id="email"
+            className="email"
             name="email"
             onChange={signInFormik.handleChange}
             value={signInFormik.values.email}
@@ -259,7 +340,7 @@ const SignUp = (props) => {
             <input
               type={showLoginPassword ? "text" : "password"}
               placeholder="Password"
-              id="password"
+              className="password"
               name="password"
               onChange={signInFormik.handleChange}
               value={signInFormik.values.password}
