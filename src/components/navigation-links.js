@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import './navigation-links.css'
 import NewDeliveryOrder from '../views/NewDeliveryOrder';
 import DeliveryOrderSummary from '../views/DeliveryOrderSummary';
+import Services from '../views/services';
 import SignUp from '../views/signup';
 
 const NavigationLinks = (props) => {
@@ -15,11 +16,17 @@ const NavigationLinks = (props) => {
       <Link to="/about-page" className="navigation-links-navlink1 navbar-link">
         {props.text1}
       </Link>
-      <span className="navigation-links-text navbar-link">{props.text2}</span>
+      {/* <Link to="/services" className="navigation-links-navlink3 navbar-link">
+        {props.text2}
+      </Link> */}
+      <Link to="/services" className="navigation-links-navlink3 navbar-link">
+        {props.text2}
+      </Link>
       <span className="navigation-links-text1 navbar-link">{props.text4}</span>
       <Link to="/contact-us" className="navigation-links-navlink2 navbar-link">
         {props.text5}
       </Link>
+      
       <div
         data-thq="thq-dropdown"
         className="navigation-links-thq-dropdown list-item"

@@ -74,6 +74,7 @@ const Navbar = (props) => {
             <NavigationLinks
               rootClassName="navigation-links-root-class-name11"
               className=""
+              text2="Services"
             ></NavigationLinks>
           </div>
           <div className="navbar-social-media">

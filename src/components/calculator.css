@@ -8,8 +8,6 @@
   height: 100%;
   overflow: auto;
   background-color: rgba(2, 0, 3, 0.846);
-  
-  
 }
 .price-calculator-modal-content form {
   margin-top: 20px;
@@ -29,8 +27,10 @@
   margin: 10% auto;
   padding: 40px;
   border: 1px solid #888;
-  width: 40%;
+  width: 65%; 
   z-index: 10000;
+  position: relative;
+  /* text-decoration: bold; */
 }
 
 .price-calculator-close {
@@ -59,8 +59,7 @@
 .price-calculator-modal-content select {
   appearance: none;
   -webkit-appearance: none;
-  -moz-appearance: none;
-  
+  -moz-appearance: none;  
   /* background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>'); */
   background-repeat: no-repeat;
   background-position: right 10px center;
@@ -73,19 +72,37 @@
   font-weight: bold;
   font-size: large;
 }
+.calculate-button-container{
+  display: flex;
+  /* justify-content: left; */
+  margin-bottom: 20px;
+}
 
-.calculate-button {
-  position: fixed;
+.calculate-button,
+.create-order-button {
+  /* position: absolute; */
   background-color: var(--dl-color-backgrounds-primary);
   color: var(--dl-color-grays-white100);
   padding: 10px 20px;
-  /*border-radius: 50%;*/
   border-radius: 8px;
   font-size: 18px;
   cursor: pointer;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease-in-out;
+  margin-left: 30px;
   /**z-index: 9999;*/
+}
+/* .calculate-button{
+  margin-left: 10px;
+}
+.create-order-button{
+  margin-left: 70px;
+} */
+
+.create-order-button a {
+  color: inherit;
+  text-decoration: none;
+  /* margin-right:; */
 }
 
 .modal-overlay {
@@ -101,4 +118,18 @@
 
 .modal-overlay.open {
   display: block;
+}
+.delivery-options {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.delivery-options label {
+  margin-right: 20px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+.delivery-options label input{
+  margin-right: 5px;
 }

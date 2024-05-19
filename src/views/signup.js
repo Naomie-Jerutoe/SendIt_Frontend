@@ -45,8 +45,8 @@ const SignUp = () => {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            username: values.name,
             email: values.email,
+            username: values.name,
             password: values.password,
             is_admin: false
           })
@@ -69,8 +69,35 @@ const SignUp = () => {
     },
     validationSchema: signInSchema,
     onSubmit: (values) => {
-      console.log(values);
-      // Add your form submission logic here
+      const handleLogin = (values) => {
+      fetch("https://sendit-backend-qhth.onrender.com/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: values.email,
+          password: values.password,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.token) {
+            console.log("Login successful");
+            console.log("Token:", data.token);
+            // Store the token in localStorage or handle it appropriately
+            localStorage.setItem("token", data.token);
+          } else {
+            console.error("Login failed:", data.message);
+            // Handle the error case (e.g., show an alert or error message)
+            alert(data.message);
+          }
+        })
+        .catch((err) => {
+          console.error("Error:", err);
+        });
+    };
+    handleLogin(values);
 
     },
   });

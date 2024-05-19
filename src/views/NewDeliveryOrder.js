@@ -92,7 +92,7 @@ const NewDeliveryOrder = () => {
             name="customerName"
             value={formData.customerName}
             onChange={handleChange}
-            placeholder="What's your name?"
+            placeholder="e.g John Doe"
           />
         </div>
         <div>
@@ -103,7 +103,7 @@ const NewDeliveryOrder = () => {
             name="phoneNumber"
             value={formData.phoneNumber}
             onChange={handleChange}
-            placeholder="What's your phone number?"
+            placeholder="e.g 0712 345 678"
           />
         </div>
         <div>
@@ -124,7 +124,7 @@ const NewDeliveryOrder = () => {
             name="pickupLocation"
             value={formData.pickupLocation}
             onChange={handleChange}
-            placeholder="Where do you want us to pick it up?"
+            placeholder="e.g Mali Safi Goods, Shop 1B, Ground Floor, Imenti House"
           />
         </div>
         <div>
@@ -134,7 +134,7 @@ const NewDeliveryOrder = () => {
             name="deliveryAddress"
             value={formData.deliveryAddress}
             onChange={handleChange}
-            placeholder="Where do we take it to?"
+            placeholder="e.g Marsabit Plaza, Ngong Road"
           />
         </div>
         <div>
@@ -157,12 +157,15 @@ const NewDeliveryOrder = () => {
             placeholder="What is the approximate weight of your goods? (If less than 1kg just input 1kg)"
           />
         </div>
-        <button type="submit">Create Delivery Order</button>
+        <div className="button-container">
+        <button type="submit">Create Delivery Order</button> 
         <button type="button" onClick={clearForm}>Clear Form</button>
+        </div>
       </form>
       {/**<Link to="/">Back to Home</Link>**/}
       <div className="new-delivery-order-footer">
         <Footer rootClassName="footer-root-class-name"></Footer>
+        <FloatingButton />
       </div>
     </div>
   );
