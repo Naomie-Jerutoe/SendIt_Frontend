@@ -1,4 +1,18 @@
+/* GoogleMapsPage.css */
 .maps-page {
-    background-color: #f0f0f0;
-    padding: 20px;
-}
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background-color: white; /* Ensure background color does not hide the map */
+  }
+  
+  .map-container {
+    width: 600%;
+    height: 900px; /* Ensure the map has a specific height */
+    position: relative;
+    z-index: 1; /* Ensure the map is on top */
+  }
+  
+  /* Add other necessary styles for your page */
+  

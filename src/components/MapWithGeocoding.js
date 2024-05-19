@@ -1,3 +1,4 @@
+// MapWithGeocoding.js
 import React, { useEffect, useState } from 'react';
 import { GoogleMap, Marker, Polyline, useLoadScript } from '@react-google-maps/api';
 import { setKey, fromAddress } from 'react-geocode';
@@ -10,11 +11,11 @@ const MapWithGeocoding = () => {
   const [selectedParcel, setSelectedParcel] = useState(null);
 
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "AIzaSyBOzf-XaussCXmQ7jdKxZriWMjLcqPZDbo", // Your Google Maps API key
+    googleMapsApiKey: "AIzaSyBOzf-XaussCXmQ7jdKxZriWMjLcqPZDbo", // Ensure this key is correct
   });
 
   useEffect(() => {
-    setKey("AIzaSyBOzf-XaussCXmQ7jdKxZriWMjLcqPZDbo"); // Set your Google Maps API key using setKey method
+    setKey("AIzaSyBOzf-XaussCXmQ7jdKxZriWMjLcqPZDbo");
     fetchParcelData();
   }, []);
 
@@ -23,50 +24,50 @@ const MapWithGeocoding = () => {
       if (!token || typeof token !== 'string') {
         throw new Error('Invalid token specified: must be a string');
       }
-  
+
       const decodedToken = jwtDecode(token);
-  
+
       if (!decodedToken || !decodedToken.sub) {
         throw new Error('Invalid token: sub field missing');
       }
-  
+
       return decodedToken.sub.userId;
     } catch (error) {
       console.error('Error decoding token:', error);
       return null;
     }
   };
-  
-  const API_BASE_URL = 'https://sendit-backend-qhth.onrender.com/'
+
+  const API_BASE_URL = 'https://sendit-backend-qhth.onrender.com/';
   const fetchParcelData = async () => {
     try {
       const token = localStorage.getItem('token');
       if (!token) {
         throw new Error('JWT token not found in local storage');
       }
-  
+
       const userId = getUserIdFromToken(token);
       if (!userId) {
         throw new Error('Unable to extract user ID from token');
       }
-  
+
       const response = await fetch(`${API_BASE_URL}/users/${userId}/parcels`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-  
+
       if (!response.ok) {
         throw new Error('Failed to fetch parcel data');
       }
-  
+
       const data = await response.json();
-  
+
       if (!data || !data.parcels || data.parcels.length === 0) {
         setParcelData([]);
         return;
       }
-  
+
       const parcelsWithCoordinates = await Promise.all(data.parcels.map(async parcel => {
         const pickupLatLng = await geocodeAddress(parcel.pickup_location);
         const destLatLng = await geocodeAddress(parcel.destination);
@@ -78,8 +79,9 @@ const MapWithGeocoding = () => {
           destLng: destLatLng.lng,
         };
       }));
-  
+
       setParcelData(parcelsWithCoordinates);
+      console.log('Parcel data:', parcelsWithCoordinates); // Add logging here
     } catch (error) {
       console.error('Error fetching parcel data:', error);
     }
@@ -105,15 +107,15 @@ const MapWithGeocoding = () => {
   }
 
   if (!isLoaded) {
-    return <div>Loading maps</div>;
+    return <div>Loading maps...</div>;
   }
 
   return (
     <div className="map-container">
-    <div style={{ height: '600px', width: '100%' }}>
       <GoogleMap
-        center={{ lat: 0, lng: 0 }}
-        zoom={4}
+        center={{ lat: -1.2847063190982493, lng: 36.82576856761328 }} // Center the map on a specific location
+        zoom={10} // Adjust the zoom level
+        mapContainerStyle={{ height: '100%', width: '100%' }} // Ensure the map container has proper styling
       >
         {parcelData.map(parcel => (
           <React.Fragment key={parcel.id}>
@@ -145,10 +147,8 @@ const MapWithGeocoding = () => {
           <ParcelDetails parcel={selectedParcel} />
         </div>
       )}
-      </div>
     </div>
   );
 };
-
 
 export default MapWithGeocoding;

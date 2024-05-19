@@ -1,9 +1,8 @@
-
-import React from 'react';
 import './GoogleMapsPage.css';
 import MapWithGeocoding from './MapWithGeocoding'; // Import your Google Maps component
 
 const GoogleMapsPage = () => {
+  console.log("GoogleMapsPage component rendered");
   return (
     <div>
        <div className="maps-page">
