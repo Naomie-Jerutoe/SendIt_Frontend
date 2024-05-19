@@ -9,7 +9,7 @@
   
   .map-container {
     width: 600%;
-    height: 900px; /* Ensure the map has a specific height */
+    height: 850px; /* Ensure the map has a specific height */
     position: relative;
     z-index: 1; /* Ensure the map is on top */
   }
