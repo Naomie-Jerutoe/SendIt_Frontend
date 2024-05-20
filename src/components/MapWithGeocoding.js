@@ -1,21 +1,28 @@
-// MapWithGeocoding.js
+// src/components/MapWithGeocoding.js
 import React, { useEffect, useState } from 'react';
-import { GoogleMap, Marker, Polyline, useLoadScript } from '@react-google-maps/api';
-import { setKey, fromAddress } from 'react-geocode';
+import { GoogleMap, Marker, DirectionsRenderer, useLoadScript,  Polyline } from '@react-google-maps/api';
+import { setKey, fromAddress, setLanguage, setRegion } from 'react-geocode';
 import ParcelDetails from './ParcelDetails';
 import { jwtDecode } from 'jwt-decode';
 import './MapWithGeocoding.css';
 
+// Set the API key for Geocode
+setKey('AIzaSyBOzf-XaussCXmQ7jdKxZriWMjLcqPZDbo');
+setLanguage('en');
+setRegion('ken');
+
 const MapWithGeocoding = () => {
   const [parcelData, setParcelData] = useState([]);
   const [selectedParcel, setSelectedParcel] = useState(null);
+  const [directionsResponse, setDirectionsResponse] = useState(null);
+  const [distance, setDistance] = useState('');
+  const [duration, setDuration] = useState('');
 
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "AIzaSyBOzf-XaussCXmQ7jdKxZriWMjLcqPZDbo",
+    googleMapsApiKey: 'AIzaSyBOzf-XaussCXmQ7jdKxZriWMjLcqPZDbo',
   });
 
   useEffect(() => {
-    setKey("AIzaSyBOzf-XaussCXmQ7jdKxZriWMjLcqPZDbo");
     fetchParcelData();
   }, []);
 
@@ -38,7 +45,7 @@ const MapWithGeocoding = () => {
     }
   };
 
-  const API_BASE_URL = 'https://sendit-backend-qhth.onrender.com/';
+  const API_BASE_URL = 'https://sendit-backend-qhth.onrender.com';
   const fetchParcelData = async () => {
     try {
       const token = localStorage.getItem('token');
@@ -68,7 +75,7 @@ const MapWithGeocoding = () => {
         return;
       }
 
-      const parcelsWithCoordinates = await Promise.all(data.parcels.map(async parcel => {
+      const parcelsWithCoordinates = await Promise.all(data.parcels.map(async (parcel) => {
         const pickupLatLng = await geocodeAddress(parcel.pickup_location);
         const destLatLng = await geocodeAddress(parcel.destination);
         return {
@@ -77,6 +84,8 @@ const MapWithGeocoding = () => {
           pickupLng: pickupLatLng.lng,
           destLat: destLatLng.lat,
           destLng: destLatLng.lng,
+          pickup_location: parcel.pickup_location,
+          destination: parcel.destination,
         };
       }));
 
@@ -86,7 +95,7 @@ const MapWithGeocoding = () => {
     }
   };
 
-  const geocodeAddress = async address => {
+  const geocodeAddress = async (address) => {
     try {
       const response = await fromAddress(address);
       const { lat, lng } = response.results[0].geometry.location;
@@ -97,8 +106,31 @@ const MapWithGeocoding = () => {
     }
   };
 
-  const handleMarkerClick = parcel => {
+  const handleMarkerClick = (parcel) => {
     setSelectedParcel(parcel);
+    calculateRoute(parcel.pickup_location, parcel.destination);
+  };
+
+  const calculateRoute = (origin, destination) => {
+    if (origin && destination) {
+      const directionsService = new window.google.maps.DirectionsService();
+      directionsService.route(
+        {
+          origin: origin,
+          destination: destination,
+          travelMode: window.google.maps.TravelMode.DRIVING,
+        },
+        (result, status) => {
+          if (status === window.google.maps.DirectionsStatus.OK) {
+            setDirectionsResponse(result);
+            setDistance(result.routes[0].legs[0].distance.text);
+            setDuration(result.routes[0].legs[0].duration.text);
+          } else {
+            console.error(`error fetching directions ${result}`);
+          }
+        }
+      );
+    }
   };
 
   if (loadError) {
@@ -116,7 +148,7 @@ const MapWithGeocoding = () => {
         zoom={10} // Adjust the zoom level
         mapContainerStyle={{ height: '100%', width: '100%' }}
       >
-        {parcelData.map(parcel => (
+        {parcelData.map((parcel) => (
           <React.Fragment key={parcel.id}>
             <Marker
               position={{ lat: parcel.pickupLat, lng: parcel.pickupLng }}
@@ -132,18 +164,36 @@ const MapWithGeocoding = () => {
                 { lat: parcel.destLat, lng: parcel.destLng }
               ]}
               options={{
-                strokeColor: '#FF0000',
+                strokeColor: '#2196F3',
                 strokeOpacity: 1.0,
                 strokeWeight: 2
               }}
             />
           </React.Fragment>
         ))}
+        {directionsResponse && (
+          <DirectionsRenderer
+            directions={directionsResponse}
+            options={{
+              polylineOptions: {
+                strokeColor: '#FF0000',
+                strokeOpacity: 1.0,
+                strokeWeight: 2,
+              },
+            }}
+          />
+        )}
       </GoogleMap>
 
       {selectedParcel && (
-        <div style={{ position: 'absolute', top: '10px', right: '10px', backgroundColor: 'white', padding: '10px', borderRadius: '5px' }}>
+        <div className="parcel-details">
           <ParcelDetails parcel={selectedParcel} />
+          <div>
+            <strong>Distance:</strong> {distance}
+          </div>
+          <div>
+            <strong>Duration:</strong> {duration}
+          </div>
         </div>
       )}
     </div>

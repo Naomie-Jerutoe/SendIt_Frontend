@@ -1,6 +1,17 @@
-/* MapWithGeocoding.css */
+/* src/components/MapWithGeocoding.css */
 .map-container {
-    width: 100%;
-    height: 600px; /* or whatever height you want */
-  }
-  
+  position: relative;
+  width: 100%;
+  height: 600px; /* Adjust height as needed */
+}
+
+.parcel-details {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
