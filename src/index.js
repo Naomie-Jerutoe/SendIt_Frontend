@@ -22,8 +22,11 @@ const App = () => {
   return (
     <Router>
       <Switch>
+        <Route component={Services} exact path="/services" />
+        <Route component={UserDashboard} exact path="/user-dashboard" />
         <Route component={AboutPage} exact path="/about-page" />
         <Route component={ContactUs} exact path="/contact-us" />
+        <Route component={SignUp} exact path="/signup" />
         <Route component={Home} exact path="/" />
         <Route component={SignUp} exact path="/signup" />
         <Route component={Dashboard} exact path="/admin_dashboard" />
@@ -37,4 +40,9 @@ const App = () => {
   );
 };
 
-ReactDOM.render(<App />, document.getElementById("app"));
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('app')
+);
