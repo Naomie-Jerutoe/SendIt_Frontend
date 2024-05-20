@@ -11,7 +11,7 @@ const MapWithGeocoding = () => {
   const [selectedParcel, setSelectedParcel] = useState(null);
 
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "AIzaSyBOzf-XaussCXmQ7jdKxZriWMjLcqPZDbo", // Ensure this key is correct
+    googleMapsApiKey: "AIzaSyBOzf-XaussCXmQ7jdKxZriWMjLcqPZDbo",
   });
 
   useEffect(() => {
@@ -81,7 +81,6 @@ const MapWithGeocoding = () => {
       }));
 
       setParcelData(parcelsWithCoordinates);
-      console.log('Parcel data:', parcelsWithCoordinates); // Add logging here
     } catch (error) {
       console.error('Error fetching parcel data:', error);
     }
@@ -113,9 +112,9 @@ const MapWithGeocoding = () => {
   return (
     <div className="map-container">
       <GoogleMap
-        center={{ lat: -1.2847063190982493, lng: 36.82576856761328 }} // Center the map on a specific location
+        center={{ lat: -1.2847063190982493, lng: 36.82576856761328 }}
         zoom={10} // Adjust the zoom level
-        mapContainerStyle={{ height: '100%', width: '100%' }} // Ensure the map container has proper styling
+        mapContainerStyle={{ height: '100%', width: '100%' }}
       >
         {parcelData.map(parcel => (
           <React.Fragment key={parcel.id}>
