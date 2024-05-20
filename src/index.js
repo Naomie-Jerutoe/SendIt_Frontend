@@ -26,6 +26,7 @@ const App = () => {
         <Route component={UserDashboard} exact path="/user-dashboard" />
         <Route component={AboutPage} exact path="/about-page" />
         <Route component={ContactUs} exact path="/contact-us" />
+        <Route component={SignUp} exact path="/signup" />
         <Route component={Home} exact path="/" />
         <Route component={NewDeliveryOrder} exact path="/new-delivery-order" />
         <Route component={DeliveryOrderSummary} exact path="/delivery-order-summary" />
@@ -34,7 +35,12 @@ const App = () => {
         <Redirect to="**" />
       </Switch>
     </Router>
-  )
-}
+  );
+};
 
-ReactDOM.render(<App />, document.getElementById('app'))
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('app')
+);
