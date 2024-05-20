@@ -1,8 +1,6 @@
-// src/components/MapWithGeocoding.js
 import React, { useEffect, useState } from 'react';
 import { GoogleMap, Marker, DirectionsRenderer, useLoadScript,  Polyline } from '@react-google-maps/api';
 import { setKey, fromAddress, setLanguage, setRegion } from 'react-geocode';
-import ParcelDetails from './ParcelDetails';
 import { jwtDecode } from 'jwt-decode';
 import './MapWithGeocoding.css';
 
@@ -187,7 +185,6 @@ const MapWithGeocoding = () => {
 
       {selectedParcel && (
         <div className="parcel-details">
-          <ParcelDetails parcel={selectedParcel} />
           <div>
             <strong>Distance:</strong> {distance}
           </div>
