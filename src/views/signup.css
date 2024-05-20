@@ -1,38 +1,50 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
+.signup-container {
+  width: 100%;
+  display: flex;
+  overflow: auto;
+  min-height: 100vh;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: relative;
+}
+  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Montserrat", sans-serif;
-}
-
-body {
-  background-color: #c9d6ff;
-  background: linear-gradient(to right, #e2e2e2, #7d30fa);
+    margin: 10;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+  }
+ 
+ .body {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  height: 100vh;
-}
+  }
 
-.container {
-  background-color: #fff;
-  border-radius: 30px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
-  position: relative;
-  overflow: hidden;
-  width: 768px;
-  max-width: 100%;
-  min-height: 480px;
-}
+  .container {
+    background-color: #fff;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+    position: relative;
+    overflow: hidden;
+    width: 768px;
+    max-width: 100%;
+    min-height: 480px;
+    margin: auto; /* Add this rule */
+  }
 
 .container p {
   font-size: 14px;
   line-height: 20px;
   letter-spacing: 0.3px;
   margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .container span {
@@ -267,22 +279,4 @@ body {
 .error-message {
   color: red;
   font-size: 12px;
-}
-
-.password-input-container {
-  position: relative;
-  width: 100%;
-}
-
-.password-input-container input {
-  padding-right: 40px; /* Make space for the show password button */
-}
-
-.show-password-btn {
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  cursor: pointer;
-  color: #666;
 }
