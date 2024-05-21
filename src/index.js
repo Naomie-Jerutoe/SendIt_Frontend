@@ -10,7 +10,9 @@ import {
 import "./style.css";
 import AboutPage from "./views/about-page";
 import ContactUs from "./views/contact-us";
+import Services from "./views/services";
 import Home from "./views/home";
+import UserDashboard from "./views/user-dashboard";
 import NotFound from "./views/not-found";
 import SignUp from "./views/signup";
 import Dashboard from "./components/Admin UI/Dashboard/Dashboard";

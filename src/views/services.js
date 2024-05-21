@@ -9,6 +9,7 @@ import Features102 from '../components/features102'
 import FAQ122 from '../components/faq122'
 import Footer152 from '../components/footer152'
 import Footer from '../components/footer'
+import FloatingButton from '../components/floatingbutton'
 import './services.css'
 
 const Services = (props) => {
@@ -37,6 +38,7 @@ const Services = (props) => {
         <Footer152></Footer152>
       </div>
       <Footer rootClassName="footer-root-class-name"></Footer>
+      <FloatingButton/>
     </div>
   )
 }

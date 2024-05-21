@@ -117,34 +117,29 @@ return (
             <label htmlFor="weight">
               <b>What is the weight? (in kg):</b>
             </label>
-            <br />
-            <br />
+            <br /><br />
             <input
-              type="number"
-              id="weight"
-              placeholder="What do you estimate the weight to be?"
+              type="number" id="weight"
+              placeholder="What do you estimate the weight to be? e.g. 10"
               value={weight}
               onChange={(e) => setWeight(e.target.value)}
               required
             />
           </div>
-          <br />
+          {/* <br /> */}
           <div>
             <label htmlFor="distance">
               <b>What is the distance? (in km):</b>
             </label>
-            <br />
-            <br />
-            <input
-              type="number"
-              id="distance"
-              placeholder="What do you estimate the distance to be?"
+            <br /><br />
+            <input type="number" id="distance"
+              placeholder="What do you estimate the distance to be? e.g. 15"
               value={distance}
               onChange={(e) => setDistance(e.target.value)}
               required
             />
           </div>
-          <br />
+          {/* <br /> */}
           <div className="delivery-options">
             <label>
               <b>Select Delivery Speed:</b>
@@ -152,9 +147,7 @@ return (
             <br />
             <br />
             <label>
-              <input
-                type="radio"
-                value="standard"
+              <input type="radio" value="standard"
                 checked={deliverySpeed === 'standard'}
                 onChange={() => setDeliverySpeed('standard')}
               />
@@ -217,7 +210,7 @@ return (
           <br />
           {estimatedPrice !== null && (
             <div className="estimated-price">
-              <p>Estimated Price: {estimatedPrice} Ksh</p>
+              <p>Estimated Price: {estimatedPrice} Ksh.</p>
             </div>
           )}
           <br />

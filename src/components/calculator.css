@@ -27,7 +27,7 @@
   margin: 10% auto;
   padding: 40px;
   border: 1px solid #888;
-  width: 65%; 
+  width: 55%; 
   z-index: 10000;
   position: relative;
   /* text-decoration: bold; */
@@ -89,7 +89,7 @@
   cursor: pointer;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease-in-out;
-  margin-left: 30px;
+  margin-left: 90px;
   /**z-index: 9999;*/
 }
 /* .calculate-button{
@@ -107,8 +107,6 @@
 
 .modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   backdrop-filter: blur(25px); 
@@ -120,16 +118,40 @@
   display: block;
 }
 .delivery-options {
-  display: flex;
+  display: inherit;
   flex-wrap: wrap;
+  margin-bottom: 5px;  
 }
 
 .delivery-options label {
-  margin-right: 20px;
-  margin-bottom: 10px;
-  display: flex;
+  /* font-weight: bold; */
+  margin-right: 15px;
+  display: inline-flex;
   align-items: center;
 }
 .delivery-options label input{
-  margin-right: 5px;
+  margin-right: 10px;
+}
+
+.delivery-options input[type="radio"] {
+  width: 15px; 
+  height: 15px;
+  vertical-align: middle;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 50%;
+  /* border: 2px solid #050105; */
+  outline: none;
+  cursor: pointer;
+  background-color: white;
+}
+
+.delivery-options input[type="radio"]:checked {
+  background-color: var(--dl-color-backgrounds-primary);
+  border-color: var(--dl-color-backgrounds-primary);
+}
+.delivery-options input[type="radio"]:hover {
+  background-color: gray;
+  cursor: pointer;
 }
