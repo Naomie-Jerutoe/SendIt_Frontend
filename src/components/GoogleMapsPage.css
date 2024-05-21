@@ -9,6 +9,8 @@
   height: 100vh; /* Make the page full-height */
   padding: 20px; /* Add padding for better spacing */
   background-color: #f0f0f0; /* Light background color for better contrast */
+  margin: 0; /* Remove default margin */
+  overflow: hidden; /* Prevent overflow that might cause extra page */
 }
 
 /* Style the header */
@@ -22,14 +24,13 @@
 
 /* Adjust the map container size and styling */
 .map-container {
-  width: 200%; /* Adjusted to 90% of the viewport width */
+  width: 75vw; /* Set the width to 75% of the viewport width */
+  height: 75vh; /* Set the height to 75% of the viewport height */
   max-width: 1000px; /* Limit the maximum width for better readability */
-  height: 80%; /* Adjusted to 80% of the viewport height */
-  max-height: 600px; /* Limit the maximum height for better aspect ratio */
+  max-height: 1000px; /* Limit the maximum height */
   position: relative;
   z-index: 1;
-  border-radius: 10px; /* Add rounded corners for a softer look */
+  border-radius: 30px; /* Add rounded corners for a softer look */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
   overflow: hidden; /* Ensure contents don't overflow */
 }
-
