@@ -129,9 +129,9 @@ const Navbar = (props) => {
 };
 
 Navbar.defaultProps = {
-  text2: "Sub-menu Item",
-  text1: "New Delivery Order",
-  text3: "Delivery Order Summary",
+  // text2: "Sub-menu Item",
+  // text1: "New Delivery Order",
+  // text3: "Delivery Order Summary",
   rootClassName: "",
   text6:
     "/black___red_simple_flat_delivery_service_logo-removebg-preview-1500h.png",

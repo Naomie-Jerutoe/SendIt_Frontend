@@ -190,7 +190,11 @@ const SignUp = (props) => {
               console.log("Login successful");
               console.log("Token:", data.token);
               localStorage.setItem("token", data.token);
-              history.push("/");
+              if (data.is_admin) {
+                history.push("/admin_dashboard"); //to admin dashboard
+              } else{
+                history.push("/user-dashboard"), { token: data.token}; //regular user dashboard
+              }
             } else {
               console.error("Login failed:", data.message);
               alert(data.message);

@@ -60,7 +60,7 @@ const getWeightBasedRate = (weight) => {
   } else if (weight <= 10) {
     rate = 15; // Rate for weight between 5kg and 10kg
   } else {
-    rate = 20 + (weight - 10) * 2; // Rate for weight above 10kg, plus $2 per kg over 10kg
+    rate = 20 + (weight - 10) * 2; // Rate for weight above 10kg, plus Ksh 2 per kg over 10kg
   }
   return rate;
 };
@@ -69,11 +69,11 @@ const getWeightBasedRate = (weight) => {
 const getDistanceRate = (distance) => {
   let rate;
   if (distance <= 10) {
-    rate = 5; // Base rate for distances up to 10km
+    rate = 15; // Base rate for distances up to 25km
   } else if (distance <= 50) {
-    rate = 10 + (distance - 10) * 0.5; // Rate for distances between 10km and 50km, plus $0.5 per km over 10km
+    rate = 25 + (distance - 25) * 10; // Rate for distances between 25km and 75km, plus 25 Ksh per km over 10km
   } else {
-    rate = 25 + (distance - 50) * 0.8; // Rate for distances over 50km, plus $0.8 per km over 50km
+    rate = 40 + (distance - 75) * 20; // Rate for distances over 75km, plus 40 Ksh per km over 75km
   }
   return rate;
 };
@@ -84,9 +84,9 @@ const getDeliverySpeedRate = (deliverySpeed) => {
   if (deliverySpeed === 'standard') {
     rate = 0; // No additional charge for standard delivery
   } else if (deliverySpeed === 'express') {
-    rate = 10; // Additional charge for express delivery
+    rate = 75; // Additional charge for express delivery 75 Ksh
   } else if (deliverySpeed === 'sameday') {
-    rate = 20; // Additional charge for same-day delivery
+    rate = 150; // Additional charge for same-day delivery 150 Ksh
   }
   return rate;
 };
@@ -115,7 +115,7 @@ return (
         <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="weight">
-              <b>What is the weight? (in kg):</b>
+              <b>What is the <i>estimated</i> weight? (in kg):</b>
             </label>
             <br /><br />
             <input
@@ -129,7 +129,7 @@ return (
           {/* <br /> */}
           <div>
             <label htmlFor="distance">
-              <b>What is the distance? (in km):</b>
+              <b>What is the <i>estimated</i> distance? (in km):</b>
             </label>
             <br /><br />
             <input type="number" id="distance"
@@ -208,9 +208,10 @@ return (
             </label>
           </div>
           <br />
+          <i><b>Estimated Cost:</b><br /> </i>
           {estimatedPrice !== null && (
             <div className="estimated-price">
-              <p>Estimated Price: {estimatedPrice} Ksh.</p>
+              <p><br /> {estimatedPrice} Ksh.</p>
             </div>
           )}
           <br />
@@ -220,7 +221,7 @@ return (
             </button>
             <br />
             <button type="button" className="create-order-button">
-              <a href="/new-delivery-order">Create Order</a>
+              <a href="/signup">Sign in to create a delivery order</a>
             </button>
           </div>
         </form>

@@ -82,3 +82,17 @@
 .button-container button:last-child {
   float: right;
 }
+.back-button{
+  font-weight: bold;
+  text-align: left;
+  background-color: rgb(197, 174, 226);
+  color: var(--dl-color-grays-white100);
+  padding: 5px 8px;
+  /*border-radius: 50%;*/
+  border-radius: 50px;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease-in-out;
+  z-index: 9999;
+}
