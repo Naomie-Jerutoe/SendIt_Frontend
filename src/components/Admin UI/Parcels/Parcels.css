@@ -1,0 +1,79 @@
+.main{
+  min-height: 100vh;
+}
+
+.side-menu {
+  position: fixed;
+  background: #7D30FA;
+  width: 20vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.side-menu .brand-name {
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.side-menu li {
+  font-size: 24px;
+  padding: 10px 40px;
+  color: black;
+  display: flex;
+  align-items: center;
+}
+
+.side-menu li:hover {
+  background: white;
+  color: #7D30FA;
+}
+
+.container {
+  position: absolute;
+  right: 0;
+  width: 80vw;
+  /* height: 0, 0, auto; */
+  min-height: 100vh;
+  background: #f1f1f1;
+}
+
+.tableContainer{
+  height: 300px;
+  Overflow-y:scroll
+}
+
+.styled-table {
+  border-collapse: collapse;
+  /* margin: 25px 0; */
+  margin-left: 30px;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table thead tr {
+  background-color: #7D30FA;
+  color: #ffffff;
+  text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+  border-bottom: 2px solid #7D30FA  ;
+}

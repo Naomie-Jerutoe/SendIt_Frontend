@@ -1,0 +1,17 @@
+/* GoogleMapsPage.css */
+.maps-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background-color: white; 
+  }
+  
+  .map-container {
+    width: 600%;
+    height: 850px; 
+    position: relative;
+    z-index: 1; 
+  }
+  
+  
