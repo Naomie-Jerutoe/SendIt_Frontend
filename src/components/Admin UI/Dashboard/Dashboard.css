@@ -69,7 +69,7 @@ td {
   align-items: center;
 }
 .side-menu li:hover {
-  background: rgb(188, 11, 233);
+  background:white;
   color: #7D30FA;
 }
 .container {
@@ -172,7 +172,7 @@ td {
   align-items: flex-start;
   flex-wrap: wrap;
 }
-.container .content .content-2 .recent-payments {
+.container .content .content-2 .parcels {
   min-height: 50vh;
   flex: 5;
   background: white;
@@ -181,7 +181,7 @@ td {
   display: flex;
   flex-direction: column;
 }
-.container .content .content-2 .new-students {
+.container .content .content-2 .orders {
   flex: 2;
   background: white;
   min-height: 50vh;
@@ -190,7 +190,7 @@ td {
   display: flex;
   flex-direction: column;
 }
-.container .content .content-2 .new-students table td:nth-child(1) img {
+.container .content .content-2 .orders table td:nth-child(1) img {
   height: 40px;
   width: 40px;
 }
@@ -213,7 +213,7 @@ td {
   .side-menu li:hover {
       background: #7D30FA;
       padding: 8px 38px;
-      border: 2px solid rgb(188, 11, 233);
+      border: 2px solid white;
   }
 }
 @media screen and (max-width:536px) {
@@ -227,8 +227,8 @@ td {
       width: 30px;
       height: 30px;
   }
-  .container .content .content-2 .recent-payments table th:nth-child(2),
-  .container .content .content-2 .recent-payments table td:nth-child(2) {
+  .container .content .content-2 .parcels table th:nth-child(2),
+  .container .content .content-2 .parcels table td:nth-child(2) {
       display: none;
   }
 }

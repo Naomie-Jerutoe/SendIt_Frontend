@@ -16,15 +16,13 @@ const NavigationLinks = (props) => {
       <Link to="/about-page" className="navigation-links-navlink1 navbar-link">
         {props.text1}
       </Link>
-      {/* <Link to="/services" className="navigation-links-navlink3 navbar-link">
-        {props.text2}
-      </Link> */}
-      <Link to="/services" className="navigation-links-navlink3 navbar-link">
+      <Link to="/services" className="navigation-links-navlink2 navbar-link">
         {props.text2}
       </Link>
+
       <Link to="/maps"className="navigation-links-text1 navbar-link">{props.text4}</Link>
-      <Link to="/contact-us" className="navigation-links-navlink2 navbar-link">
-        {props.text5}
+      <Link to="/contact-us" className="navigation-links-navlink2 navbar-link"
+      {props.text5}
       </Link>
       
       <div
@@ -35,7 +33,7 @@ const NavigationLinks = (props) => {
           data-thq="thq-dropdown-toggle"
           className="navigation-links-dropdown-toggle"
         >
-          <span className="navigation-links-text2">{props.text3}</span>
+          <span className="navigation-links-text1">{props.text3}</span>
           <div
             data-thq="thq-dropdown-arrow"
             className="navigation-links-dropdown-arrow"
@@ -58,7 +56,7 @@ const NavigationLinks = (props) => {
               data-thq="thq-dropdown-toggle"
               className="navigation-links-dropdown-toggle1"
             >
-              <span className="navigation-links-text3">{props.text6}</span>
+              <span className="navigation-links-text2">{props.text6}</span>
             </div>
             </Link>
           </li>
@@ -71,7 +69,7 @@ const NavigationLinks = (props) => {
               data-thq="thq-dropdown-toggle"
               className="navigation-links-dropdown-toggle2"
             >
-              <span className="navigation-links-text4">{props.text7}</span>
+              <span className="navigation-links-text3">{props.text7}</span>
             </div>
             </Link>
           </li>
