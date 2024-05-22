@@ -13,6 +13,7 @@ import ContactUs from "./views/contact-us";
 import Home from "./views/home";
 import NotFound from "./views/not-found";
 import SignUp from "./views/signup";
+import GoogleMapsPage from './components/GoogleMapsPage';
 import Dashboard from "./components/Admin UI/Dashboard/Dashboard";
 import Users from "./components/Admin UI/Users/Users";
 import Parcels from "./components/Admin UI/Parcels/Parcels";
@@ -26,6 +27,7 @@ const App = () => {
   return (
     <Router>
       <Switch>
+
         <Route component={Services} exact path="/services" />
         <Route component={UserDashboard} exact path="/user-dashboard" />
         <Route component={Services} exact path="/services" />
@@ -34,6 +36,8 @@ const App = () => {
         <Route component={ContactUs} exact path="/contact-us" />
         <Route component={Signup} exact path="/signup" />
         <Route component={Home} exact path="/" />
+        <Route component={SignUp} exact path="/signup" />
+        <Route component={GoogleMapsPage} exact path="/maps" />
         <Route component={NewDeliveryOrder} exact path="/new-delivery-order" />
         <Route
           component={DeliveryOrderSummary}
