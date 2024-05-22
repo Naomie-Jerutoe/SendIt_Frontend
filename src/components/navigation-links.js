@@ -21,7 +21,7 @@ const NavigationLinks = (props) => {
       </Link>
 
       <Link to="/maps"className="navigation-links-text1 navbar-link">{props.text4}</Link>
-      <Link to="/contact-us" className="navigation-links-navlink2 navbar-link"
+      <Link to="/contact-us" className="navigation-links-navlink2 navbar-link">
       {props.text5}
       </Link>
       
