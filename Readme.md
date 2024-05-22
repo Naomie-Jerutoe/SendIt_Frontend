@@ -12,6 +12,19 @@
 ## Introduction
 
 SendIT is a courier service that helps users deliver parcels to different destinations. SendIT provides courier quotes based on weight categories.
+
+**Front-End**:
+
+| Tool/Library                                                                       | Version |
+| ---------------------------------------------------------------------------------- | ------- |
+| [JavaScript](https://www.typescriptlang.org/)                                      | ^3.5.3  |
+| [React](https://reactjs.org/)                                                      | ^16.8.6 |
+| [Material UI](https://material-ui.com/)                                            | ^4.2.1  |
+| [Navi](https://frontarm.com/navi/en/)                                              | ^0.13.3 |
+| [JWT](https://www.npmjs.com/package/auth0-js)                                      | ^9.11.2 |
+| [@dwqs/react-virtual-list](https://www.npmjs.com/package/@dwqs/react-virtual-list) | ^1.0.0  |
+| 
+
 ## Installation
 
 1. Clone the repository:
