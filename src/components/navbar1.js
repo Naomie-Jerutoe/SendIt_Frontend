@@ -28,7 +28,7 @@ const Navbar1 = (props) => {
           ></NavigationLinks1>
         </div>
         <div className="navbar1-container1">
-          <Link to="/contact-us" className="navbar1-navlink1 button">
+          <Link to="/" className="navbar1-navlink1 button">
             <span className="navbar1-text">{props.text1}</span>
             <svg viewBox="0 0 1024 1024" className="navbar1-icon">
               <path
