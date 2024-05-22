@@ -160,6 +160,7 @@
 }
 .navigation-links-text3 {
   width: 100%;
+  margin: 0 15px;
   cursor: pointer;
   display: flex;
   font-size: 14px;

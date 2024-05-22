@@ -19,9 +19,10 @@ const NavigationLinks = (props) => {
       <Link to="/services" className="navigation-links-navlink2 navbar-link">
         {props.text2}
       </Link>
-      <span className="navigation-links-text navbar-link">{props.text4}</span>
-      <Link to="/contact-us" className="navigation-links-navlink3 navbar-link">
-        {props.text5}
+
+      <Link to="/maps"className="navigation-links-text1 navbar-link">{props.text4}</Link>
+      <Link to="/contact-us" className="navigation-links-navlink2 navbar-link"
+      {props.text5}
       </Link>
       
       <div
