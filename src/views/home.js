@@ -262,7 +262,6 @@ const Home = (props) => {
           </div>
         </div>
       </main>
-      <FloatingButton/>
       <Footer></Footer>
       <Copyright></Copyright>
     </div>
