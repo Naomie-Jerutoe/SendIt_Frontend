@@ -16,7 +16,7 @@ const FloatingButton = () => {
   return (
     <div>
       <div className="floating-button" onClick={openModal}>
-        Get Quote
+        Get A Quote
       </div>
       <PriceCalculatorForm isOpen={isModalOpen} onClose={closeModal} />
     </div>
