@@ -34,7 +34,7 @@ const App = () => {
         <Route component={UserDashboard} exact path="/user-dashboard" />
         <Route component={AboutPage} exact path="/about-page" />
         <Route component={ContactUs} exact path="/contact-us" />
-        <Route component={Signup} exact path="/signup" />
+        <Route component={SignUp} exact path="/signup" />
         <Route component={Home} exact path="/" />
         <Route component={SignUp} exact path="/signup" />
         <Route component={GoogleMapsPage} exact path="/maps" />
