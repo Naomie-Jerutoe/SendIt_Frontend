@@ -38,9 +38,9 @@ const Sidebar = (props) => {
               {props.link3}
             </Link>
           </nav>
-          <button type="button" className="sidebar-button button">
+          {/* <button type="button" className="sidebar-button button">
             {props.button}
-          </button>
+          </button> */}
         </div>
         <div data-thq="thq-burger-menu" className="sidebar-burger-menu"></div>
         <div data-thq="thq-mobile-menu" className="sidebar-mobile-menu">

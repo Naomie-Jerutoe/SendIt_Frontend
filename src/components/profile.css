@@ -42,12 +42,20 @@
 .profile-button {
   fill: var(--dl-color-theme-primary1);
   color: var(--dl-color-theme-primary1);
-  width: 205px;
-  height: 24px;
+  height: 40px;
+  align-self: flex-start;
   font-style: normal;
+  margin-top: var(--dl-space-space-oneandhalfunits);
   transition: 0.3s;
   font-weight: 800;
+  margin-left: 0px;
   border-color: var(--dl-color-theme-primary1);
+  margin-right: var(--dl-space-space-halfunit);
+  border-radius: var(--dl-radius-radius-buttonradius);
+  margin-bottom: var(--dl-space-space-halfunit);
+  background-color: transparent;
+  padding-top: var(--dl-space-space-halfunit) ;
+  padding-bottom: var(--dl-space-space-halfunit);
 }
 .profile-button:hover {
   fill: var(--dl-color-theme-accent2);
