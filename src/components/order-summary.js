@@ -5,9 +5,9 @@ import PropTypes from 'prop-types'
 import './order-summary.css'
 
 const OrderSummary = (props) => {
-  const userParcels = props.parcelData.map((parcel)=>{
+  const userParcels = props.parcelData.map((parcel,index)=>{
     return (
-      <div className="order-summary-container06">
+      <div className="order-summary-container06" key={index}>
         <div className="order-summary-container07">
           <div className="order-summary-container08">{parcel.id}</div>
           <div className="order-summary-container09">{parcel.pickup_location}</div>
