@@ -1,122 +1,208 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import FloatingButton from '../components/floatingbutton';
+import React, { useState, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
 import Navbar from '../components/navbar';
 import Footer from '../components/footer';
 import './NewDeliveryOrder.css';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+
+
+const getUserId = () => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    const decodedToken = jwtDecode(token);
+    return decodedToken.userId; // Assuming the user ID is stored in the 'userId' field of the token
+  }
+  return null;
+};
 
 const NewDeliveryOrder = () => {
   const [formData, setFormData] = useState({
-    customerName: '',
     deliveryAddress: '',
-    items: '',
+    description: '',
     weight: '',
-    phoneNumber: '',
-    email: '',
+    speed: 'standard',
+    distance: '', // Add distance to the form data
   });
-
-  const[orderStatus, setOrderStatus] = useState('');
+  const [estimatedCost, setEstimatedCost] = useState(0);
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const history = useHistory();
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    const fetchUserId = () => {
+      const id = getUserId();
+      console.log('User ID:', id);
+      setUserId(id);
+    };
+
+    fetchUserId();
+  }, []);
+
+
+  const getUserEmail = () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      return decodedToken.email;
+    }
+    return null;
   };
 
-  const handleSubmit = async (e) => {
-  e.preventDefault();
-  try {
-    // Create a new parcel
-    const parcelResponse = await fetch('https://sendit-backend-qhth.onrender.com/parcels', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
-      },
-      body: JSON.stringify(formData),
-    });
+  const userEmail = getUserEmail();
 
-    if (parcelResponse.ok) {
-      const parcelData = await parcelResponse.json();
-      const parcelId = parcelData.id;
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
 
-      // Create a new order
-      const orderResponse = await fetch('https://sendit-backend-qhth.onrender.com/orders', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
-        },
-        body: JSON.stringify({ parcelId, status: 'enroute' }),
-      });
-
-      if (orderResponse.ok) {
-        const orderData = await orderResponse.json();
-        setOrderStatus(orderData.status);
-        history.push('/delivery-order-summary', { parcelId, orderStatus: orderData.status });
-      } else {
-        console.error('Failed to create order');
-      }
-    } else {
-      console.error('Failed to create parcel');
+    // Recalculate the estimated cost if the weight, speed, or distance is changed
+    if (name === 'weight' || name === 'speed' || name === 'distance') {
+      const weight = formData.weight || 1;
+      const speed = formData.speed || 'standard';
+      const distance = formData.distance || 10; // Provide a default distance if not set
+      const estimatedCost = calculateEstimatedCost(distance, weight, speed);
+      setEstimatedCost(estimatedCost);
     }
-  } catch (error) {
-    console.error('An error occurred:', error);
-  }
-};
+  };
+
+  const [orderId, setOrderId] = useState(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        setErrorMessage('Token not found. Please sign in first.');
+        return;
+      }
+
+      const response = await axios.post(
+        'https://sendit-backend-qhth.onrender.com/parcels',
+        {
+          pickup_location: formData.pickupLocation,
+          destination: formData.deliveryAddress,
+          weight: formData.weight,
+          description: formData.description,
+          price: estimatedCost,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        setSuccessMessage('Order created successfully!');
+        clearForm();
+        const userId = getUserId(); //get user ID from token
+        setOrderId({orderId: response.data.id, userId} );
+      } else {
+        setErrorMessage('Failed to create order.');
+      }
+    } catch (error) {
+      console.error('Error creating order:', error);
+      setErrorMessage('Failed to create order.');
+    }
+  };
 
   const clearForm = () => {
     setFormData({
-      customerName: '',
       pickupLocation: '',
       deliveryAddress: '',
-      items: '',
+      description: '',
       weight: '',
-      phoneNumber: '',
-      email: '',
+      speed: 'standard',
+      distance: '', // Reset the distance field
     });
+    setEstimatedCost(0);
   };
+
+  const calculateEstimatedCost = (distance, weight, speed) => {
+  // Define the base cost for weight
+  const baseCostUpTo1kg = 5;
+  const costBetween1To5kg = 10;
+  const costBetween5To10kg = 15;
+  const costAbove10kg = 20;
+  const additionalCostPerKgAbove10kg = 2;
+
+  // Define the base cost for distance
+  const baseCostUpTo25km = 15;
+  const costBetween25To75km = 25;
+  const additionalCostPerKmOver25km = 25;
+  const costAbove75km = 40;
+  const additionalCostPerKmOver75km = 40;
+
+  // Define the speed multipliers
+  const standardSpeedMultiplier = 1;
+  const expressSpeedMultiplier = 75;
+  const samedaySpeedMultiplier = 150;
+
+  // Calculate the weight cost
+  let weightCost;
+  if (weight <= 1) {
+    weightCost = baseCostUpTo1kg;
+  } else if (weight <= 5) {
+    weightCost = costBetween1To5kg;
+  } else if (weight <= 10) {
+    weightCost = costBetween5To10kg;
+  } else {
+    weightCost = costAbove10kg + (weight - 10) * additionalCostPerKgAbove10kg;
+  }
+
+  // Calculate the distance cost
+  let distanceCost;
+  if (distance <= 25) {
+    distanceCost = baseCostUpTo25km;
+  } else if (distance <= 75) {
+    distanceCost = costBetween25To75km + (distance - 25) * additionalCostPerKmOver25km;
+  } else {
+    distanceCost = costAbove75km + (distance - 75) * additionalCostPerKmOver75km;
+  }
+
+  // Calculate the speed multiplier based on the selected speed
+  let speedMultiplier;
+  switch (speed) {
+    case 'express':
+      speedMultiplier = expressSpeedMultiplier;
+      break;
+    case 'sameday':
+      speedMultiplier = samedaySpeedMultiplier;
+      break;
+    default:
+      speedMultiplier = standardSpeedMultiplier;
+  }
+
+  // Calculate the base cost
+  const baseCost = weightCost + distanceCost;
+
+  // Calculate the estimated cost
+  const estimatedCost = baseCost + speedMultiplier;
+
+  return estimatedCost.toFixed(2); // Round the estimated cost to two decimal places
+};
+  
+
 
   return (
     <div className="new-delivery-order-container">
       <div className="new-delivery-order-navbar">
         <Navbar rootClassName="navbar-root-class-name"></Navbar>
+        <div className="orders-buttons">
+        <button className="back-button">
+          <Link to="user-dashboard">Go to previous page</Link>
+        </button>
+        <button className="view-order-summary-button">
+          <Link to={`/delivery-order-summary/${userId}`}>View Order Summary</Link>
+        </button>
+        </div>
       </div>
+      {userEmail && <p>Logged in as: {userEmail}</p>}
       <h2>Create New Delivery Order</h2>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="customerName">Customer Name</label>
-          <input
-            type="text"
-            id="customerName"
-            name="customerName"
-            value={formData.customerName}
-            onChange={handleChange}
-            placeholder="e.g John Doe"
-          />
-        </div>
-        <div>
-          <label htmlFor="customerName">Phone Number</label>
-          <input
-            type="text"
-            id="phoneNumber"
-            name="phoneNumber"
-            value={formData.phoneNumber}
-            onChange={handleChange}
-            placeholder="e.g 0712 345 678"
-          />
-        </div>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input
-            type="text"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="What's your email address?"
-          />
-        </div>
         <div>
           <label htmlFor="pickupLocation">Pick Up Location</label>
           <textarea
@@ -138,13 +224,13 @@ const NewDeliveryOrder = () => {
           />
         </div>
         <div>
-          <label htmlFor="items">Items</label>
+          <label htmlFor="items">Description</label>
           <textarea
-            id="items"
-            name="items"
-            value={formData.items}
+            id="description"
+            name="description"
+            value={formData.description}
             onChange={handleChange}
-            placeholder="What items are we delivering for you?"
+            placeholder="Brief description of the Item(s) above. e.g 1 HP, 2 Dell, 3 Acer"
           />
         </div>
         <div>
@@ -157,15 +243,54 @@ const NewDeliveryOrder = () => {
             placeholder="What is the approximate weight of your goods? (If less than 1kg just input 1kg)"
           />
         </div>
+        <div>
+          <label htmlFor="distance">Distance (in km)</label>
+          <textarea
+            id="distance"
+            name="distance"
+            value={formData.distance}
+            onChange={handleChange}
+            placeholder="Enter the approximate distance in kilometers"
+          />
+        </div>
+        <div className="est-cost">
+        <p>Estimated Cost: {estimatedCost}</p>
+        </div>
+        <div>
+          <label htmlFor="speed">Delivery Speed</label>
+          <select
+            id="speed"
+            name="speed"
+            value={formData.speed}
+            onChange={handleChange}
+          >
+            <option value="standard">Standard</option>
+            <option value="express">Express</option>
+            <option value="sameday">Same Day</option>
+          </select>
+        </div>
         <div className="button-container">
-        <button type="submit">Create Delivery Order</button> 
-        <button type="button" onClick={clearForm}>Clear Form</button>
+          <button type="submit">Create Delivery Order</button>
+          <button type="button" onClick={clearForm}>Clear Form</button>
         </div>
       </form>
-      {/**<Link to="/">Back to Home</Link>**/}
+      {successMessage && <p>{successMessage}</p>}
+      {/* Add the success message and order summary link here */}
+    {orderId && (
+      <div className="order-success-message">
+        <p>Order creation successful!</p>
+        <button className="view-order-summary-button">
+          <Link to={`/order-summary/${orderId}`}>View Order Summary</Link>
+        </button>
+        <p>
+          View your order summary here:{' '}
+          <Link to={`/order-summary/${orderId}`}>Order Summary</Link>
+        </p>
+      </div>
+    )}
+
       <div className="new-delivery-order-footer">
         <Footer rootClassName="footer-root-class-name"></Footer>
-        <FloatingButton />
       </div>
     </div>
   );
