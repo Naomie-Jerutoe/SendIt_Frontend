@@ -15,7 +15,6 @@ import * as Yup from "yup";
 import zxcvbn from "zxcvbn";
 import { jwtDecode } from "jwt-decode";
 import "./signup.css";
-import { jwtDecode } from "jwt-decode";
 
 const Loader = () => (
   <div className="loader-container">
