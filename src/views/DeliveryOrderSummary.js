@@ -4,28 +4,28 @@ import { jwtDecode } from 'jwt-decode';
 import Navbar from '../components/navbar';
 import './DeliveryOrderSummary.css';
 
-const getUserId = () => {
-  const token = localStorage.getItem('token');
-  if (token) {
-    const decodedToken = jwtDecode(token);
-    return decodedToken.userId; // Assuming the user ID is stored in the 'userId' field of the token
-  }
-  return null;
-};
+// const getUserId = () => {
+//   const token = localStorage.getItem('token');
+//   if (token) {
+//     const decodedToken = jwtDecode(token);
+//     return decodedToken.userId; // Assuming the user ID is stored in the 'userId' field of the token
+//   }
+//   return null;
+// };
 
 const DeliveryOrderSummary = () => {
   const [orders, setOrders] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
-  const [userId, setUserId] = useState(null); // Initialize userId with null
+  // const [userId, setUserId] = useState(null); // Initialize userId with null
 
-  useEffect(() => {
-    const fetchUserId = async () => {
-      const id = getUserId();
-      setUserId(id); // Update userId state with the retrieved value
-    };
+  // useEffect(() => {
+  //   const fetchUserId = async () => {
+  //     const id = getUserId();
+  //     setUserId(id); // Update userId state with the retrieved value
+  //   };
 
-    fetchUserId();
-  }, []);
+  //   fetchUserId();
+  // }, []);
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -36,14 +36,17 @@ const DeliveryOrderSummary = () => {
           return;
         }
 
-        if (userId === null) {
-          // If userId is still null, return from the function
-          return;
-        }
+        // if (userId === null) {
+        //   // If userId is still null, return from the function
+        //   return;
+        // }
+
+        const userId =89;
 
         const response = await axios.get(`https://sendit-backend-qhth.onrender.com/users/${userId}/parcels`, {
           headers: {
-            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
           },
         });
 
@@ -59,7 +62,8 @@ const DeliveryOrderSummary = () => {
     };
 
     fetchOrders();
-  }, [userId]);
+  }, []);
+  // }, [userId]);
 
   return (
     <div>
