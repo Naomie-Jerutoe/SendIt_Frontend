@@ -32,6 +32,37 @@ const UserDashboard = (props) => {
     }
   }, [])
 
+  const [userData,setUserData] = useState({})
+  const [parcelData,setParcelData] = useState([])
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    fetch(`http://172.31.0.214:5000/users/18`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    })
+    .then(res => res.json())
+    .then(data => setUserData(data))
+    .catch(err => console.error(err))
+  }, []);
+  useEffect(()=>{
+    const fetchParcelData = async () => {
+      const token = localStorage.getItem('token'); 
+      const res = await fetch(`http://172.31.0.214:5000/users/18/parcels`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await res.json();
+      console.log(data.parcels);
+      setParcelData(data.parcels);
+    };
+
+    fetchParcelData().catch((err) => console.error(err));
+  },[userData])
+  
   return (
     <div className="user-dashboard-container">
       <Helmet>
@@ -43,13 +74,13 @@ const UserDashboard = (props) => {
       </div>
       <div className="user-dashboard-container2">
         <div className="user-dashboard-container3">
-          <Profile rootClassName="profile-root-class-name"></Profile>
+          <Profile rootClassName="profile-root-class-name" text={userData.username} text1={userData.email}></Profile>
           <Sidebar rootClassName="sidebar-root-class-name"></Sidebar>
         </div>
         <div className="user-dashboard-container4">
           <div className="user-dashboard-container5">
-            <Welcome welcome={`Welcome ${userName}`} />
-            <OrderSummary></OrderSummary>
+            <Welcome welcome={userData.username}></Welcome>
+            <OrderSummary parcelData={parcelData}></OrderSummary>
           </div>
         </div>
         <Footer rootClassName="footer-root-class-name1"></Footer>

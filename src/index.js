@@ -18,17 +18,12 @@ import SignUp from "./views/signup";
 import PasswordReset from "./components/PasswordReset";
 import ResetPassword from "./components/ResetPassword";
 import GoogleMapsPage from './components/GoogleMapsPage';
-import GoogleMapsPage from './components/GoogleMapsPage';
 import NewDeliveryOrder from "./views/NewDeliveryOrder";
 import DeliveryOrderSummary from "./views/DeliveryOrderSummary";
 import Dashboard from "./components/Admin UI/Dashboard/Dashboard";
 import Users from "./components/Admin UI/Users/Users";
 import Parcels from "./components/Admin UI/Parcels/Parcels";
 import Orders from "./components/Admin UI/Orders/Orders";
-import Services from "./views/services";
-import UserDashboard from "./views/user-dashboard";
-import NewDeliveryOrder from "./views/NewDeliveryOrder";
-import DeliveryOrderSummary from "./views/DeliveryOrderSummary";
 
 
 const isAuthenticated = () => {
