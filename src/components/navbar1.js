@@ -29,7 +29,7 @@ const Navbar1 = (props) => {
         </div>
         <div className="navbar1-container1">
           <Link to="/contact-us" className="navbar1-navlink1 button">
-            <span className="navbar1-text">Contact Us</span>
+            <span className="navbar1-text">Log Out</span>
             <svg viewBox="0 0 1024 1024" className="navbar1-icon">
               <path
                 d="M512 170l342 342-342 342-60-60 238-240h-520v-84h520l-238-240z"

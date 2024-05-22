@@ -6,12 +6,14 @@ import Navbar from '../components/navbar'
 import FeatureCard from '../components/feature-card'
 import Slide from '../components/slide'
 import Footer from '../components/footer'
+import FloatingButton from '../components/floatingbutton'
 import Copyright from '../components/copyright'
 import './home.css'
 
 const Home = (props) => {
   return (
     <div className="home-container">
+      {/**<div className="floating-button">Get A Quote</div>**/}
       <Helmet>
         <title>SendIT App</title>
         <meta property="og:title" content="SendIT App" />
@@ -260,6 +262,7 @@ const Home = (props) => {
           </div>
         </div>
       </main>
+      <FloatingButton/>
       <Footer></Footer>
       <Copyright></Copyright>
     </div>

@@ -1,6 +1,7 @@
 .welcome-container {
   display: flex;
   position: relative;
+  
 }
 .welcome-text {
   font-style: normal;

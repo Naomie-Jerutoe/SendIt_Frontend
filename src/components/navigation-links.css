@@ -32,6 +32,10 @@
   margin-left: var(--dl-space-space-twounits);
   text-decoration: none;
 }
+.navigation-links-navlink3 {
+  margin-left: var(--dl-space-space-twounits);
+  text-decoration: none;
+}
 .navigation-links-thq-dropdown {
   cursor: pointer;
   display: inline-block;
@@ -156,6 +160,7 @@
 }
 .navigation-links-text3 {
   width: 100%;
+  margin: 0 15px;
   cursor: pointer;
   display: flex;
   font-size: 14px;
