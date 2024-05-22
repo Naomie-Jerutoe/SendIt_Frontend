@@ -16,8 +16,8 @@ const AboutPage = (props) => {
   return (
     <div className="about-page-container">
       <Helmet>
-        <title>AboutPage - Send IT App</title>
-        <meta property="og:title" content="AboutPage - Send IT App" />
+        <title>AboutPage - SendIT App</title>
+        <meta property="og:title" content="AboutPage - SendIT App" />
       </Helmet>
       <div className="about-page-navbar1">
         <Navbar rootClassName="navbar-root-class-name"></Navbar>
