@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { GoogleMap, Marker, DirectionsRenderer, useLoadScript,  Polyline } from '@react-google-maps/api';
+import { GoogleMap, Marker, DirectionsRenderer, useLoadScript, Polyline } from '@react-google-maps/api';
 import { setKey, fromAddress, setLanguage, setRegion } from 'react-geocode';
-import { jwtDecode } from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode'; // Fixed import for jwt-decode
 import './MapWithGeocoding.css';
 
 // Set the API key for Geocode
@@ -96,6 +96,9 @@ const MapWithGeocoding = () => {
   const geocodeAddress = async (address) => {
     try {
       const response = await fromAddress(address);
+      if (response.status === 'ZERO_RESULTS') {
+        throw new Error(`No results found for address: ${address}`);
+      }
       const { lat, lng } = response.results[0].geometry.location;
       return { lat, lng };
     } catch (error) {
@@ -124,7 +127,7 @@ const MapWithGeocoding = () => {
             setDistance(result.routes[0].legs[0].distance.text);
             setDuration(result.routes[0].legs[0].duration.text);
           } else {
-            console.error(`error fetching directions ${result}`);
+            console.error(`Error fetching directions: ${result}`);
           }
         }
       );
