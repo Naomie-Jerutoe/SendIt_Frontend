@@ -1,11 +1,12 @@
 {
-  "name": "mobile-app",
+  "name": "sendit-app",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@craco/craco": "^7.1.0",
+    "@google/maps": "^1.1.3",
     "@react-google-maps/api": "^2.19.3",
-    "axios": "^1.7.1",
+    "axios": "^1.6.8",
     "dotenv": "^16.4.5",
     "formik": "^2.4.6",
     "jwt-decode": "^4.0.0",

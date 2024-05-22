@@ -3,6 +3,7 @@ import "./Orders.css";
 import help from "../Dashboard/help-web-button.png"
 import dash from "../Dashboard/dashboard (2).png"
 import { useState, useEffect } from "react";
+import OrderDetail from "./OrderDetail";
 
 function Orders() {
   const [orders, setOrders]= useState([])
@@ -10,10 +11,9 @@ function Orders() {
   const [status, setStatus] = useState("")
   const [message, setMessage] = useState("")
   const [error, setError] = useState("")
-  const [loading, setLoading] = useState(true)
+  const [selectedOrder, setSelectedOrder] = useState(null)
+  const [showModal, setShowModal] = useState(false);
 
-
-  
   const handleSubmit = (e) => {
     e.preventDefault();
     fetch(`https://sendit-backend-qhth.onrender.com/orders`, {
@@ -46,7 +46,7 @@ function Orders() {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`, // Assuming you store JWT in localStorage
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
       },
     })
     .then(response => {
@@ -57,16 +57,38 @@ function Orders() {
     })
     .then(data => {
       setOrders(data.order_statuses);
-      setLoading(false);
     })
     .catch(error => {
       setError(error.message);
-      setLoading(false);
     });
   }, []);
 
-  if (loading) return <div>Loading...</div>;
-  // if (error) return <div>Error: {error}</div>;
+  const handleViewDetails = (orderId) => {
+    fetch(`https://sendit-backend-qhth.onrender.com/orders/${orderId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch order details');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log(data.order_status)
+        setSelectedOrder(data.order_status);
+      })
+      .catch(error => {
+        console.log(error.message);
+      });
+  }
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedOrder(null);
+  };
 
   return (
     <div className="main">
@@ -86,7 +108,7 @@ function Orders() {
         <div>
           <h1>ORDERS</h1>
           <div className="center"> 
-            <h3>Create Order</h3>
+            <h3>Create Status Order</h3>
             <form onSubmit={handleSubmit}>
             <div className="inputbox">
               <input 
@@ -133,12 +155,15 @@ function Orders() {
                       <td>{order.status}</td>
                       <td>{order.parcel_id}</td>
                       <td>
-                        <button>View</button>
+                        <button onClick={()=>{handleViewDetails(order.id)}}>View</button>
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
+            </div>
+            <div>
+              {selectedOrder && <OrderDetail order={selectedOrder} onClose={handleCloseModal} />}
             </div>
             </div>
           </div>

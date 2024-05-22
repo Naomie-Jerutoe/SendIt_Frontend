@@ -8,6 +8,7 @@ import income from "./income.png"
 import users from "./users.png"
 import parcels from "./parcels.png"
 import notify from "./notifications.png"
+import home from "./home.png"
 
 
 function Dashboard() {
@@ -18,10 +19,11 @@ function Dashboard() {
           <h1>SendIt</h1>
         </div>
         <ul>
-          <li><img src={dash} alt="" />&nbsp; <span>Dashboard</span></li>
+          <Link to={'/admin_dashboard'}><li><img src={dash} alt="" />&nbsp; <span>Dashboard</span></li></Link>
           <Link to={'/admin_users'}><li><img src="" alt="" />&nbsp; <span>Users</span></li></Link>
           <Link to={'/admin_parcels'}><li><img src="" alt="" />&nbsp; <span>Parcels</span></li></Link>
           <Link to={'/admin_orders'}><li><img src="" alt="" />&nbsp; <span>Orders</span></li></Link>
+          <Link to={'/admin_profile'}><li><img src="" alt="" />&nbsp; <span>My Profile</span></li></Link>
           <Link to={'/help'}><li><img src={help} alt="" />&nbsp; <span>Help</span></li></Link>{" "}
         </ul>
       </div>
@@ -33,13 +35,14 @@ function Dashboard() {
               <button type="submit"><img src={search} alt="" /></button>
             </div>
             <div className="user">
-            <Link to={'/admin_users'}><a href="#" className="btn">
-                Add New
-              </a></Link>
-              <img src={notify} alt="" />
+              <Link to={'/'}><img src={home} alt="" title="Go to home page" /></Link>
+              
               <div className="img-case">
-                <Link to={'/login'}><img src={logo} alt="" /></Link> 
+                <Link to={'/admin_profile'}><img src={logo} alt="" title="My profile"/></Link> 
               </div>
+              <Link to={'/logout'}><a href="#" className="btn" title="Logout">
+                Logout
+              </a></Link>
             </div>
           </div>
         </div>
@@ -47,7 +50,7 @@ function Dashboard() {
           <div className="cards">
             <div className="card">
               <div className="box">
-                <h1>2194</h1>
+                <h1>194</h1>
                 <h3>Users</h3>
               </div>
               <div className="icon-case">
@@ -74,7 +77,7 @@ function Dashboard() {
             </div>
           </div>
           <div className="content-2">
-            <div className="recent-payments">
+            <div className="parcels">
               <div className="title">
                 <h2>Parcels</h2>
                 <Link to={'/admin_parcels'}><a href="#" className="btn">
@@ -93,9 +96,7 @@ function Dashboard() {
                   <td>Karen</td>
                   <td>Utawala</td>
                   <td>
-                    <a href="#" className="btn">
-                      View
-                    </a>
+                  <Link to={"/admin_parcels"}><a href="#" className="btn">View</a></Link>
                   </td>
                 </tr>
                 <tr>
@@ -103,17 +104,40 @@ function Dashboard() {
                   <td>Nakuru</td>
                   <td>Nairobi</td>
                   <td>
-                    <a href="#" className="btn">
-                      View
-                    </a>
+                    <Link to={"/admin_parcels"}><a href="#" className="btn">View</a></Link>
+                      
+                  </td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Uthiru 87</td>
+                  <td>Kasarani</td>
+                  <td>
+                  <Link to={"/admin_parcels"}><a href="#" className="btn">View</a></Link>
+                  </td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>Nakuru</td>
+                  <td>Westlands</td>
+                  <td>
+                  <Link to={"/admin_parcels"}><a href="#" className="btn">View</a></Link>
+                  </td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>Mogadishu</td>
+                  <td>Garissa</td>
+                  <td>
+                  <Link to={"/admin_parcels"}><a href="#" className="btn">View</a></Link>
                   </td>
                 </tr>
               </table>
             </div>
-            <div className="new-students">
+            <div className="orders">
               <div className="title">
                 <h2>Orders</h2>
-                <Link to={'/admin_parcels'}><a href="#" className="btn">
+                <Link to={'/admin_orders'}><a href="#" className="btn">
                   View All
                 </a></Link>
               </div>
@@ -127,27 +151,35 @@ function Dashboard() {
                   <td>1</td>
                   <td>Enroute</td>
                   <td>
-                  <a href="#" className="btn">
-                      View
-                    </a>
+                  <Link to={"/admin_orders"}><a href="#" className="btn">View</a></Link>
                   </td>
                 </tr>
                 <tr>
                   <td>2</td>
                   <td>Delivered</td>
                   <td>
-                  <a href="#" className="btn">
-                      View
-                    </a>
+                  <Link to={"/admin_orders"}><a href="#" className="btn">View</a></Link>
                   </td>
                 </tr>
                 <tr>
                   <td>3</td>
                   <td>Delivered</td>
                   <td>
-                  <a href="#" className="btn">
-                      View
-                    </a>
+                  <Link to={"/admin_orders"}><a href="#" className="btn">View</a></Link>
+                  </td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>Enroute</td>
+                  <td>
+                  <Link to={"/admin_orders"}><a href="#" className="btn">View</a></Link>
+                  </td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>Canceled</td>
+                  <td>
+                  <Link to={"/admin_orders"}><a href="#" className="btn">View</a></Link>
                   </td>
                 </tr>
               </table>
