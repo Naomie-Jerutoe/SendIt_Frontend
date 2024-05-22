@@ -13,6 +13,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import zxcvbn from "zxcvbn";
 import "./signup.css";
+import { jwtDecode } from "jwt-decode";
 
 const Loader = () => (
   <div className="loader-container">
@@ -190,7 +191,15 @@ const SignUp = (props) => {
               console.log("Login successful");
               console.log("Token:", data.token);
               localStorage.setItem("token", data.token);
-              history.push("/");
+              // get the roles of the user from the token and redirect them accordingly
+              const accessToken = jwtDecode(data.token);
+              if (accessToken.sub.is_admin === true) {
+                history.push("/admin_dashboard");
+              } else if (accessToken.sub.is_admin === false) {
+                history.push("/user-dashboard");
+              } else {
+                history.push("/");
+              }
             } else {
               console.error("Login failed:", data.message);
               alert(data.message);
