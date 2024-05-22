@@ -14,7 +14,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import zxcvbn from "zxcvbn";
 import "./signup.css";
-import {jwtDecode} from "jwt-decode"; // Note: Ensure jwtDecode is correctly imported
+import {jwtDecode} from "jwt-decode";
 
 const Loader = () => (
   <div className="loader-container">
