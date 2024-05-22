@@ -9,7 +9,7 @@ import SignUp from "../views/signup";
 
 const NavigationLinks = (props) => {
   return (
-    <nav className={`navigation-links-nav ${props.rootClassName} `}>
+    <nav className={`navigation-links-nav ${props.rootClassName}`}>
       <Link to="/" className="navigation-links-navlink navbar-link">
         {props.text}
       </Link>
@@ -19,29 +19,20 @@ const NavigationLinks = (props) => {
       <Link to="/services" className="navigation-links-navlink2 navbar-link">
         {props.text2}
       </Link>
-
-      <Link to="/maps" className="navigation-links-text1 navbar-link">
+      <Link to="/maps" className="navigation-links-navlink3 navbar-link">
         {props.text4}
       </Link>
-      <Link to="/contact-us" className="navigation-links-navlink2 navbar-link">
+      
+      <Link to="/contact-us" className="navigation-links-navlink4 navbar-link">
         {props.text5}
       </Link>
 
-      <div
-        data-thq="thq-dropdown"
-        className="navigation-links-thq-dropdown list-item"
-      >
-        <div
-          data-thq="thq-dropdown-toggle"
-          className="navigation-links-dropdown-toggle"
-        >
+      <div data-thq="thq-dropdown" className="navigation-links-thq-dropdown list-item">
+        <div data-thq="thq-dropdown-toggle" className="navigation-links-dropdown-toggle">
           <span className="navigation-links-text1">{props.text3}</span>
-          <div
-            data-thq="thq-dropdown-arrow"
-            className="navigation-links-dropdown-arrow"
-          >
+          <div data-thq="thq-dropdown-arrow" className="navigation-links-dropdown-arrow">
             <svg viewBox="0 0 1024 1024" className="navigation-links-icon">
-              <path d="M426 726v-428l214 214z" className=""></path>
+              <path d="M426 726v-428l214 214z"></path>
             </svg>
           </div>
         </div>
@@ -62,10 +53,7 @@ const NavigationLinks = (props) => {
               </div>
             </Link>
           </li>
-          <li
-            data-thq="thq-dropdown"
-            className="navigation-links-dropdown1 list-item"
-          >
+          <li data-thq="thq-dropdown" className="navigation-links-dropdown1 list-item">
             <Link to="/delivery-order-summary">
               <div
                 data-thq="thq-dropdown-toggle"
@@ -82,27 +70,27 @@ const NavigationLinks = (props) => {
 };
 
 NavigationLinks.defaultProps = {
-  text5: "Contact us",
-  text6: "New Delivery Order",
-  text7: "Delivery Order Summary",
-  text2: "Service",
-  text3: "Orders",
-  rootClassName: "",
-  text4: "Tracking",
-  text: "Home",
-  text1: "About",
-};
+  text: 'Home',
+  text1: 'About',
+  text2: 'Service',
+  text3: 'Orders',
+  text4: 'Tracking',
+  text5: 'Contact us',
+  text6: 'New Delivery Order',
+  text7: 'Delivery Order Summary',
+  rootClassName: '',
+}
 
 NavigationLinks.propTypes = {
+  text: PropTypes.string,
+  text1: PropTypes.string,
+  text2: PropTypes.string,
+  text3: PropTypes.string,
+  text4: PropTypes.string,
   text5: PropTypes.string,
   text6: PropTypes.string,
   text7: PropTypes.string,
-  text2: PropTypes.string,
-  text3: PropTypes.string,
   rootClassName: PropTypes.string,
-  text4: PropTypes.string,
-  text: PropTypes.string,
-  text1: PropTypes.string,
-};
+}
 
 export default NavigationLinks;

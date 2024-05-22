@@ -9,11 +9,12 @@ import {
   FaEye,
   FaSpinner,
 } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import zxcvbn from "zxcvbn";
 import "./signup.css";
-import { jwtDecode } from "jwt-decode";
+import {jwtDecode} from "jwt-decode";
 
 const Loader = () => (
   <div className="loader-container">
@@ -171,46 +172,40 @@ const SignUp = (props) => {
       password: "",
     },
     validationSchema: signInSchema,
-    onSubmit: (values) => {
-      setIsLoading(true);
-      const handleLogin = (values) => {
-        fetch("https://sendit-backend-qhth.onrender.com/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: values.email,
-            password: values.password,
-          }),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            setIsLoading(false);
-            if (data.token) {
-              console.log("Login successful");
-              console.log("Token:", data.token);
-              localStorage.setItem("token", data.token);
-              // get the roles of the user from the token and redirect them accordingly
-              const accessToken = jwtDecode(data.token);
-              if (accessToken.sub.is_admin === true) {
-                history.push("/admin_dashboard");
-              } else if (accessToken.sub.is_admin === false) {
-                history.push("/user-dashboard");
-              } else {
-                history.push("/");
-              }
-            } else {
-              console.error("Login failed:", data.message);
-              alert(data.message);
-            }
-          })
-          .catch((err) => {
-            setIsLoading(false);
-            console.error("Error:", err);
-          });
-      };
-      handleLogin(values);
+    onSubmit: async (values) => {
+      setIsLoading(true); // Start loading
+      try {
+        const response = await fetch(
+          "https://sendit-backend-qhth.onrender.com/login",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: values.email,
+              password: values.password,
+            }),
+          }
+        );
+        const data = await response.json();
+        setIsLoading(false); // Stop loading
+
+        if (data.token) {
+          localStorage.setItem("token", data.token);
+          const accessToken = jwtDecode(data.token);
+          if (accessToken.sub.is_admin) {
+            history.push("/admin_dashboard");
+          } else {
+            history.push("/user-dashboard");
+          }
+        } else {
+          throw new Error(data.message || "Login failed");
+        }
+      } catch (error) {
+        setIsLoading(false); // Stop loading
+        alert(error.message);
+      }
     },
   });
 
@@ -224,6 +219,11 @@ const SignUp = (props) => {
       {isLoading && <Loader />}
       <div className={`form-container sign-up ${isSignUp ? "active" : ""}`}>
         <form onSubmit={signUpFormik.handleSubmit}>
+          <img
+            className="image"
+            src={`${process.env.PUBLIC_URL}/black___red_simple_flat_delivery_service_logo-removebg-preview-1500h.png`}
+            alt="Logo"
+          />
           <h1>Create Account</h1>
           <div className="social-icons">
             <a href="#" className="icon" id="google">
@@ -318,22 +318,13 @@ const SignUp = (props) => {
       </div>
       <div className={`form-container sign-in ${isSignUp ? "" : "active"}`}>
         <form onSubmit={signInFormik.handleSubmit}>
+          <img
+            className="image"
+            src={`${process.env.PUBLIC_URL}/black___red_simple_flat_delivery_service_logo-removebg-preview-1500h.png`}
+            alt="Logo"
+          />
           <h1>Sign In</h1>
-          <div className="social-icons">
-            <a href="#" className="icon" id="google">
-              <FaGooglePlusG />
-            </a>
-            <a href="#" className="icon" id="facebook">
-              <FaFacebookF />
-            </a>
-            <a href="#" className="icon" id="github">
-              <FaGithub />
-            </a>
-            <a href="#" className="icon" id="linkedin">
-              <FaLinkedinIn />
-            </a>
-          </div>
-          <span>or use your email password</span>
+          <h5>Enter your Email and Password</h5>
           <input
             type="email"
             placeholder="Email"
@@ -364,11 +355,11 @@ const SignUp = (props) => {
           {signInFormik.errors.password && (
             <div className="error-message">{signInFormik.errors.password}</div>
           )}
-          <a href="#" className="reset">
-            Forget Your Password?
-          </a>
-          <button className="signup" type="submit">
-            Sign In
+          <Link to="/reset-password" className="reset">
+            Forgot Your password?
+          </Link>
+          <button className="signup" type="submit" disabled={isLoading}>
+            {isLoading ? <Loader /> : "Sign In"}
           </button>
         </form>
       </div>
