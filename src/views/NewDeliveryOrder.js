@@ -195,11 +195,9 @@ const NewDeliveryOrder = () => {
         <button className="back-button">
           <Link to="user-dashboard">Go to previous page</Link>
         </button>
-        {userId && ( // Render the button only if userId is not null
         <button className="view-order-summary-button">
           <Link to={`/delivery-order-summary/${userId}`}>View Order Summary</Link>
         </button>
-            )}
         </div>
       </div>
       {userEmail && <p>Logged in as: {userEmail}</p>}
