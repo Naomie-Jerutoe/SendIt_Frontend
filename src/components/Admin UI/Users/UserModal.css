@@ -1,0 +1,75 @@
+.center {
+  position: relative;
+  padding: 20px 20px;
+  background: #fff;
+  border-radius: 10px;
+  margin: 20px 590px 20px 50px;
+}
+
+.center h3 {
+  font-size: 2em;
+  border-left: 5px solid #7D30FA;
+  padding: 5px;
+  color: #000;
+  letter-spacing: 5px;
+  margin-bottom: 30px;
+  font-weight: bold;
+  padding-left: 10px;
+}
+
+.center .inputbox {
+  position: relative;
+  width: 300px;
+  height: 50px;
+  margin-bottom: 20px;
+}
+.center .inputbox input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border: 2px solid #000;
+  outline: none;
+  background: none;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 1.2em;
+}
+.center .inputbox:last-child {
+  margin-bottom: 0;
+}
+.center .inputbox span {
+  position: absolute;
+  top: 14px;
+  left: 20px;
+  font-size: 1em;
+  transition: 0.6s;
+  font-family: sans-serif;
+}
+.center .inputbox input:focus ~ span,
+.center .inputbox input:valid ~ span {
+  transform: translateX(-13px) translateY(-35px);
+  font-size: 1em;
+}
+
+.btn {
+  background: #7D30FA;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+}
+.btn:hover {
+  color: #7D30FA;
+  background: white;
+  padding: 3px 8px;
+  border: 2px solid #7D30FA;
+}
+
+.btn2 {
+  background: #c609ec;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  margin: 10px 10px 0 0;
+}
+
