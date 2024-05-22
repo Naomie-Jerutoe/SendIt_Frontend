@@ -37,7 +37,7 @@ const OrderSummary = (props) => {
           <span className="order-summary-text4">{props.text3}</span>
         </div>
       </div>
-      {props.parcelData?userParcels:null}
+      {userParcels}
     </div>
   )
 }
