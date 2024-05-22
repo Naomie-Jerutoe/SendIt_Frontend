@@ -13,8 +13,8 @@ import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import zxcvbn from "zxcvbn";
-import { jwtDecode } from "jwt-decode";
 import "./signup.css";
+import {jwtDecode} from "jwt-decode";
 
 const Loader = () => (
   <div className="loader-container">
@@ -23,7 +23,9 @@ const Loader = () => (
 );
 
 const SignUp = (props) => {
+  const history = useHistory();
   const [isSignUp, setIsSignUp] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // Add the isLoading state
 
   const handleSignUpClick = () => {
     setIsSignUp(true);
@@ -54,7 +56,7 @@ const SignUp = (props) => {
     },
     validationSchema: signUpSchema,
     onSubmit: async (values) => {
-      setIsLoading(true);
+      setIsLoading(true); // Start loading
       try {
         const response = await fetch(
           "https://sendit-backend-qhth.onrender.com/signup",
@@ -72,7 +74,7 @@ const SignUp = (props) => {
           }
         );
         const data = await response.json();
-        setIsLoading(false);
+        setIsLoading(false); // Stop loading
 
         if (response.ok) {
           alert("Sign up successful");
@@ -86,7 +88,7 @@ const SignUp = (props) => {
           );
         }
       } catch (error) {
-        setIsLoading(false);
+        setIsLoading(false); // Stop loading
         alert(error.message);
       }
       signUpFormik.resetForm();
@@ -100,7 +102,7 @@ const SignUp = (props) => {
     },
     validationSchema: signInSchema,
     onSubmit: async (values) => {
-      setIsLoading(true);
+      setIsLoading(true); // Start loading
       try {
         const response = await fetch(
           "https://sendit-backend-qhth.onrender.com/login",
@@ -116,7 +118,7 @@ const SignUp = (props) => {
           }
         );
         const data = await response.json();
-        setIsLoading(false);
+        setIsLoading(false); // Stop loading
 
         if (data.token) {
           localStorage.setItem("token", data.token);
@@ -130,7 +132,7 @@ const SignUp = (props) => {
           throw new Error(data.message || "Login failed");
         }
       } catch (error) {
-        setIsLoading(false);
+        setIsLoading(false); // Stop loading
         alert(error.message);
       }
     },
@@ -181,8 +183,8 @@ const SignUp = (props) => {
           {signUpFormik.errors.password && (
             <div className="error-message">{signUpFormik.errors.password}</div>
           )}
-          <button className="signup" type="submit">
-            Sign Up
+          <button className="signup" type="submit" disabled={isLoading}>
+            {isLoading ? <Loader /> : "Sign Up"}
           </button>
         </form>
       </div>
@@ -220,8 +222,8 @@ const SignUp = (props) => {
           <Link to="/reset-password" className="reset">
             Forgot Your password?
           </Link>
-          <button className="signup" type="submit">
-            Sign In
+          <button className="signup" type="submit" disabled={isLoading}>
+            {isLoading ? <Loader /> : "Sign In"}
           </button>
         </form>
       </div>
