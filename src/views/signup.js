@@ -3,6 +3,13 @@ import { FaGooglePlusG, FaFacebookF, FaGithub, FaLinkedinIn } from "react-icons/
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./signup.css";
+import { jwtDecode } from "jwt-decode";
+
+const Loader = () => (
+  <div className="loader-container">
+    <FaSpinner className="loader-spinner" />
+  </div>
+);
 
 const SignUp = (props) => {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -48,8 +55,45 @@ const SignUp = (props) => {
     },
     validationSchema: signInSchema,
     onSubmit: (values) => {
-      console.log(values);
-      // Add your form submission logic here
+      setIsLoading(true);
+      const handleLogin = (values) => {
+        fetch("https://sendit-backend-qhth.onrender.com/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: values.email,
+            password: values.password,
+          }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            setIsLoading(false);
+            if (data.token) {
+              console.log("Login successful");
+              console.log("Token:", data.token);
+              localStorage.setItem("token", data.token);
+              // get the roles of the user from the token and redirect them accordingly
+              const accessToken = jwtDecode(data.token);
+              if (accessToken.sub.is_admin === true) {
+                history.push("/admin_dashboard");
+              } else if (accessToken.sub.is_admin === false) {
+                history.push("/user-dashboard");
+              } else {
+                history.push("/");
+              }
+            } else {
+              console.error("Login failed:", data.message);
+              alert(data.message);
+            }
+          })
+          .catch((err) => {
+            setIsLoading(false);
+            console.error("Error:", err);
+          });
+      };
+      handleLogin(values);
     },
   });
 

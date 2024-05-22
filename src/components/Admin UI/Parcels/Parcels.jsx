@@ -3,9 +3,12 @@ import "./Parcels.css";
 import help from "../Dashboard/help-web-button.png"
 import dash from "../Dashboard/dashboard (2).png"
 import { useState, useEffect } from "react";
+import ParcelDetail from "./ParcelDetail";
 
 function Parcels() {
   const [parcels, setParcels] = useState([])
+  const [selectedParcel, setSelectedParcel] = useState(null)
+  const [showModal, setShowModal] = useState(false);
 
   const token = localStorage.getItem('token')
 
@@ -31,6 +34,33 @@ function Parcels() {
   useEffect(() => {
     fetchParcels();
   }, []);
+
+  const handleViewDetails = (parcelId) => {
+    fetch(`https://sendit-backend-qhth.onrender.com/parcels/${parcelId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch parcel details');
+        }
+        return response.json();
+      })
+      .then(data => {
+        setSelectedParcel(data.parcel);
+      })
+      .catch(error => {
+        console.log(error.message);
+      });
+  }
+
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedParcel(null);
+  };
 
   return (
     <div className="main">
@@ -76,13 +106,16 @@ function Parcels() {
                       <td>{parcel.status}</td>
                       <td>{parcel.user_id}</td>
                       <td>
-                        <button>View</button>
+                        <button onClick={() => handleViewDetails(parcel.id)}>View</button>
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
               </div>
+              <div>
+              {selectedParcel && <ParcelDetail parcel={selectedParcel} onClose={handleCloseModal} />}
+              </div>            
         </div>
       </div>
     </div>
