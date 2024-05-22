@@ -17,7 +17,9 @@ const NavigationLinks1 = (props) => {
       <Link to="/services" className="navigation-links1-navlink2 navbar-link">
         {props.text2}
       </Link>
-      <span className="navigation-links1-text navbar-link">{props.text4}</span>
+      <Link to="/maps" className="navigation-links-navlink3 navbar-link">
+        {props.text4}
+      </Link>
       <div
         data-thq="thq-dropdown"
         className="navigation-links1-thq-dropdown list-item"

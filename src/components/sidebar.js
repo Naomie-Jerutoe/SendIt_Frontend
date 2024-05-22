@@ -15,9 +15,9 @@ const Sidebar = (props) => {
               <button className="thq-button-filled sidebar-action1">
                 {props.action1}
               </button>
-              <button className="thq-button-outline sidebar-action2">
+              <Link to="/maps" className="thq-button-outline sidebar-action2">
                 {props.action2}
-              </button>
+              </Link>
             </div>
             <Link
               to="/user-dashboard"
