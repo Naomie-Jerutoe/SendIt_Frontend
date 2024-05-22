@@ -12,9 +12,11 @@ const Sidebar = (props) => {
         <div data-thq="thq-navbar-nav" className="sidebar-desktop-menu">
           <nav className="sidebar-links">
             <div className="sidebar-buttons">
+              <Link to='/new-delivery-order'>
               <button className="thq-button-filled sidebar-action1">
                 {props.action1}
               </button>
+              </Link>
               <Link to="/maps" className="thq-button-outline sidebar-action2">
                 {props.action2}
               </Link>
@@ -80,7 +82,7 @@ const Sidebar = (props) => {
 
 Sidebar.defaultProps = {
   rootClassName: '',
-  action1: 'Place Order',
+  action1: 'Create Order',
   button: 'Cancel Order',
   link5: 'Link5',
   logoSrc:
