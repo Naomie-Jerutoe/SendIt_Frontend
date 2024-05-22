@@ -28,10 +28,10 @@ Profile.defaultProps = {
   heading: 'Profile',
   text2: 'Phone: +2547 65469287',
   text: 'Name: Jane Doe',
+  rootClassName: '',
   imageSrc: 'https://play.teleporthq.io/static/svg/default-img.svg',
   text1: 'Email: Jane.d@gmail.com',
   button: 'Edit Profile',
-  rootClassName: '',
 }
 
 Profile.propTypes = {
@@ -39,10 +39,10 @@ Profile.propTypes = {
   heading: PropTypes.string,
   text2: PropTypes.string,
   text: PropTypes.string,
+  rootClassName: PropTypes.string,
   imageSrc: PropTypes.string,
   text1: PropTypes.string,
   button: PropTypes.string,
-  rootClassName: PropTypes.string,
 }
 
 export default Profile

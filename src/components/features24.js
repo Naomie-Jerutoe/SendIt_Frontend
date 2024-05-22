@@ -99,7 +99,7 @@ Features24.defaultProps = {
   action1: 'Download the App',
   feature7Description:
     'Real-time updates coming your way! Our admins keep you posted about your parcel status.',
-  feature7Title: 'Admin Update Parcel Status',
+  feature7Title: 'Updates on Parcel Status',
   rootClassName: '',
   feature10ImageSrc:
     'https://images.unsplash.com/photo-1517292987719-0369a794ec0f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTcxNTY4OTg4MXw&ixlib=rb-4.0.3&q=80&w=1080',
@@ -121,7 +121,7 @@ Features24.defaultProps = {
   feature5ImageSrc:
     'https://images.unsplash.com/photo-1446694292248-2c2a7e575b1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTcxNTY4OTg4MXw&ixlib=rb-4.0.3&q=80&w=1080',
   feature9ImageAlt: 'Image of delivery notifications feature',
-  feature8Title: 'Admin Update Parcel Location',
+  feature8Title: 'Parcel Location',
   feature1ImageSrc:
     'https://images.unsplash.com/photo-1640695186958-470133dee50f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTcxNTY4OTg4MXw&ixlib=rb-4.0.3&q=80&w=1080',
   feature9Description:

@@ -54,6 +54,7 @@ const SignUp = (props) => {
   });
 
   return (
+    <div className="signup-wrapper">
     <div className={`container ${isSignUp ? "active" : ""}`} id="container">
       <div className={`form-container sign-up ${isSignUp ? "active" : ""}`}>
         <form onSubmit={signUpFormik.handleSubmit}>
@@ -178,6 +179,7 @@ const SignUp = (props) => {
         </div>
       </div>
     </div>
+  </div>
   );
 };
 

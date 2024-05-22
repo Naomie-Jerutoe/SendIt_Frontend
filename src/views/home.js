@@ -138,8 +138,8 @@ const Home = (props) => {
           </div>
           <div data-type="slider" className="home-slider">
             <Slide
-              role="Regional Manager - Best Lady (Nairobi)"
-              author="Wendy Sha"
+              role="Interior Designer"
+              author="Sharon Nduku"
               testimonial="This app is amazing! The user interface is top-notch and very intuitive. Its modern design makes it a joy to navigate. I especially appreciate the ability to track and place multiple orders throughout the day. "
               rootClassName="slide-root-class-name2"
             ></Slide>
@@ -147,7 +147,7 @@ const Home = (props) => {
               role="DESIGN DIRECTOR"
               author="Bill Smith"
               imageSrc="/vector%202-700w.png"
-              testimonial='“Stunning app! I use it everyday since I discovered it and love it every since. It really makes newsreading a pleasure. I enjoy all the customization options available, super highly recommended!"'
+              testimonial='“Stunning app! I use it everyday since I discovered it and love it every since. It really makes delivery of my design pieces seemless, super highly recommended!"'
               testimonial2="Super highly recommended!”"
               rootClassName="slide-root-class-name"
             ></Slide>
@@ -155,7 +155,7 @@ const Home = (props) => {
               role="FREELANCE WRITER"
               author="Julia Xang"
               imageSrc="/vector%202%20%5B2%5D-700w.png"
-              testimonial="“Feedbox is very easy to use and flexible! I especially like the pre-made templates that are accessible; they're extraordinary for monitoring a few feed sources and various RSS Feeds together.”"
+              testimonial="“SendIt is very easy to use! I especially like the user dashboard; they're extraordinary for monitoring parcels seemlessly.”"
               rootClassName="slide-root-class-name1"
             ></Slide>
           </div>

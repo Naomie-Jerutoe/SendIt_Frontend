@@ -8,7 +8,6 @@ import Stats1 from '../components/stats1'
 import Testimonial16 from '../components/testimonial16'
 import Features23 from '../components/features23'
 import Features24 from '../components/features24'
-import FloatingButton from '../components/floatingbutton'
 import Footer from '../components/footer'
 import './about-page.css'
 
@@ -39,7 +38,6 @@ const AboutPage = (props) => {
       </div>
       <div className="about-page-footer7">
         <Footer rootClassName="footer-root-class-name"></Footer>
-        <FloatingButton/>
       </div>
     </div>
   )

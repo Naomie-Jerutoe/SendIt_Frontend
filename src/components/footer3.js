@@ -70,30 +70,30 @@ const Footer3 = (props) => {
 }
 
 Footer3.defaultProps = {
-  termsLink: 'Terms and Conditions',
-  link5: 'Download App',
-  link2: 'Contact Us',
-  privacyLink: 'Privacy Policy',
-  image1Alt: 'SEND IT Logo',
-  link4: 'Support',
+  cookiesLink: 'Cookies Policy',
   image1Src:
     'https://images.unsplash.com/photo-1621972799746-674326f5b9c0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTcxNTk3NDQ4Nnw&ixlib=rb-4.0.3&q=80&w=1080',
-  link3: 'FAQs',
-  cookiesLink: 'Cookies Policy',
   link1: 'About Us',
+  image1Alt: 'SEND IT Logo',
+  privacyLink: 'Privacy Policy',
+  link2: 'Contact Us',
+  link3: 'FAQs',
+  termsLink: 'Terms and Conditions',
+  link5: 'Download App',
+  link4: 'Support',
 }
 
 Footer3.propTypes = {
+  cookiesLink: PropTypes.string,
+  image1Src: PropTypes.string,
+  link1: PropTypes.string,
+  image1Alt: PropTypes.string,
+  privacyLink: PropTypes.string,
+  link2: PropTypes.string,
+  link3: PropTypes.string,
   termsLink: PropTypes.string,
   link5: PropTypes.string,
-  link2: PropTypes.string,
-  privacyLink: PropTypes.string,
-  image1Alt: PropTypes.string,
   link4: PropTypes.string,
-  image1Src: PropTypes.string,
-  link3: PropTypes.string,
-  cookiesLink: PropTypes.string,
-  link1: PropTypes.string,
 }
 
 export default Footer3

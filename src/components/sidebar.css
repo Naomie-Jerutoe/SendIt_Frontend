@@ -125,19 +125,11 @@
   margin-top: var(--dl-space-space-twounits);
   align-items: center;
 }
-.sidebar-root-class-name {
-  width: 262px;
-  height: auto;
-  align-self: flex-start;
-  background-color: transparent;
-}
+
 @media(max-width: 767px) {
   .sidebar-navbar-interactive {
     padding-left: var(--dl-space-space-twounits);
     padding-right: var(--dl-space-space-twounits);
-  }
-  .sidebar-desktop-menu {
-    display: none;
   }
   .sidebar-burger-menu {
     display: flex;
@@ -146,12 +138,20 @@
   }
 }
 @media(max-width: 479px) {
+  .sidebar-container {
+    align-content: center;
+  }
   .sidebar-navbar-interactive {
     width: 479px;
     padding: var(--dl-space-space-unit);
   }
   .sidebar-desktop-menu {
     display: flex;
+  }
+  .sidebar-links {
+    height: 378px;
+    align-self: stretch;
+    align-content: center;
   }
   .sidebar-action1 {
     width: 163px;

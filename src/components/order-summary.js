@@ -55,19 +55,19 @@ const OrderSummary = (props) => {
 }
 
 OrderSummary.defaultProps = {
-  heading: 'Order Summary',
   text: 'Parcel ID',
   text1: 'Pickup Location',
-  text2: 'Status',
   text3: 'Destination',
+  text2: 'Status',
+  heading: 'Order Summary',
 }
 
 OrderSummary.propTypes = {
-  heading: PropTypes.string,
   text: PropTypes.string,
   text1: PropTypes.string,
-  text2: PropTypes.string,
   text3: PropTypes.string,
+  text2: PropTypes.string,
+  heading: PropTypes.string,
 }
 
 export default OrderSummary

@@ -19,6 +19,7 @@ import Dashboard from './components/Admin UI/Dashboard/Dashboard'
 import Users from './components/Admin UI/Users/Users'
 import Parcels from './components/Admin UI/Parcels/Parcels'
 import Orders from './components/Admin UI/Orders/Orders'
+import DeliveryOrderDeliveryOrderSummary from "./views/NewDeliveryOrder"
 
 const App = () => {
   return (
@@ -34,6 +35,7 @@ const App = () => {
         <Route component={Users} exact path="/admin_users" />
         <Route component={Parcels} exact path="/admin_parcels" />
         <Route component={Orders} exact path="/admin_orders" />
+        <Route component={NewDeliveryOrder} exact path="/new-delivery-order" />
         <Route component={NotFound} path="**" />
         <Redirect to="**" />
       </Switch>

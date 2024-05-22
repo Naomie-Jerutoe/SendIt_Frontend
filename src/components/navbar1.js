@@ -14,7 +14,7 @@ const Navbar1 = (props) => {
         data-role="Header"
         className="navbar1-max-width navigation-container"
       >
-        <Link to="/" className="">
+        <Link to="/user-dashboard" className="">
           <img
             alt={props.imageAlt}
             src={props.text6}
@@ -29,7 +29,7 @@ const Navbar1 = (props) => {
         </div>
         <div className="navbar1-container1">
           <Link to="/contact-us" className="navbar1-navlink1 button">
-            <span className="navbar1-text">Log Out</span>
+            <span className="navbar1-text">{props.text1}</span>
             <svg viewBox="0 0 1024 1024" className="navbar1-icon">
               <path
                 d="M512 170l342 342-342 342-60-60 238-240h-520v-84h520l-238-240z"
@@ -125,14 +125,11 @@ Navbar1.defaultProps = {
   imageAlt: 'logo',
   text6:
     '/black___red_simple_flat_delivery_service_logo-removebg-preview-1500h.png',
-  text3: 'Delivery Order Summary',
   text: 'Follow us',
-  button: 'Button',
-  text1: 'New Delivery Order',
   imageAlt1: 'image',
-  text2: 'Text',
   imageSrc1:
     '/black___red_simple_flat_delivery_service_logo-removebg-preview-1500h.png',
+  text1: 'Log Out',
 }
 
 Navbar1.propTypes = {
@@ -140,13 +137,10 @@ Navbar1.propTypes = {
   rootClassName: PropTypes.string,
   imageAlt: PropTypes.string,
   text6: PropTypes.string,
-  text3: PropTypes.string,
   text: PropTypes.string,
-  button: PropTypes.string,
-  text1: PropTypes.string,
   imageAlt1: PropTypes.string,
-  text2: PropTypes.string,
   imageSrc1: PropTypes.string,
+  text1: PropTypes.string,
 }
 
 export default Navbar1

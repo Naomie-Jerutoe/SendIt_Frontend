@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types'
 
-import NavigationLinks from "./navigation-links";
-import "./navbar.css";
+import NavigationLinks from './navigation-links'
+import './navbar.css'
 
 const Navbar = (props) => {
   return (
@@ -89,7 +89,6 @@ const Navbar = (props) => {
             <NavigationLinks
               rootClassName="navigation-links-root-class-name11"
               className=""
-              text2="Services"
             ></NavigationLinks>
           </div>
           <div className="navbar-social-media">
@@ -143,24 +142,24 @@ const Navbar = (props) => {
         </Link>
       </header>
     </div>
-  );
-};
+  )
+}
 
 Navbar.defaultProps = {
-  text2: "Sub-menu Item",
-  text1: "New Delivery Order",
-  text3: "Delivery Order Summary",
-  rootClassName: "",
+  text2: 'Sub-menu Item',
+  text1: 'New Delivery Order',
+  text3: 'Delivery Order Summary',
+  rootClassName: '',
   text6:
-    "/black___red_simple_flat_delivery_service_logo-removebg-preview-1500h.png",
+    '/black___red_simple_flat_delivery_service_logo-removebg-preview-1500h.png',
   imageSrc1:
-    "/black___red_simple_flat_delivery_service_logo-removebg-preview-1500h.png",
-  imageAlt: "logo",
-  imageAlt1: "image",
-  text: "Follow us",
-  primaryBtn: "Get started",
-  primaryBtn1: "Log In",
-};
+    '/black___red_simple_flat_delivery_service_logo-removebg-preview-1500h.png',
+  imageAlt: 'logo',
+  imageAlt1: 'image',
+  text: 'Follow us',
+  primaryBtn: 'Get started',
+  primaryBtn1: 'Log In',
+}
 
 Navbar.propTypes = {
   text2: PropTypes.string,
@@ -174,6 +173,6 @@ Navbar.propTypes = {
   text: PropTypes.string,
   primaryBtn: PropTypes.string,
   primaryBtn1: PropTypes.string,
-};
+}
 
-export default Navbar;
+export default Navbar
