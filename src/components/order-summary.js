@@ -5,18 +5,21 @@ import PropTypes from 'prop-types'
 import './order-summary.css'
 
 const OrderSummary = (props) => {
-  const userParcels = props.parcelData.map((parcel,index)=>{
-    return (
-      <div className="order-summary-container06" key={index}>
-        <div className="order-summary-container07">
-          <div className="order-summary-container08">{parcel.id}</div>
-          <div className="order-summary-container09">{parcel.pickup_location}</div>
-          <div className="order-summary-container10">{parcel.status}</div>
-          <div className="order-summary-container11">{parcel.destination}</div>
+  let userParcels;
+  if (props.parcelData){
+    userParcels = props.parcelData.map((parcel,index)=>{
+      return (
+        <div className="order-summary-container06" key={index}>
+          <div className="order-summary-container07">
+            <div className="order-summary-container08">{parcel.id}</div>
+            <div className="order-summary-container09">{parcel.pickup_location}</div>
+            <div className="order-summary-container10">{parcel.status}</div>
+            <div className="order-summary-container11">{parcel.destination}</div>
+          </div>
         </div>
-      </div>
-    )
-  })
+      )
+    })
+  }
   return (
     <div className="order-summary-container">
       <h1 className="order-summary-text">{props.heading}</h1>
@@ -34,7 +37,7 @@ const OrderSummary = (props) => {
           <span className="order-summary-text4">{props.text3}</span>
         </div>
       </div>
-      {userParcels}
+      {props.parcelData?userParcels:null}
     </div>
   )
 }

@@ -6,11 +6,31 @@ import Sidebar from '../components/sidebar'
 import Welcome from '../components/welcome'
 import OrderSummary from '../components/order-summary'
 import Footer from '../components/footer'
+import { jwtDecode } from 'jwt-decode';
 import './user-dashboard.css'
 
 const UserDashboard = (props) => {
   // const [userEmail, setUserEmail] = useState('')
   const [userName, setUserName] = useState('')
+
+  const getUserIdFromToken = (token) => {
+    try {
+      if (!token || typeof token !== 'string') {
+        throw new Error('Invalid token specified: must be a string');
+      }
+
+      const decodedToken = jwtDecode(token);
+
+      if (!decodedToken || !decodedToken.sub) {
+        throw new Error('Invalid token: sub field missing');
+      }
+
+      return decodedToken.sub.userId;
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      return null;
+    }
+  };
 
   useEffect(() => {
     const token = localStorage.getItem('token')
@@ -36,7 +56,8 @@ const UserDashboard = (props) => {
   const [parcelData,setParcelData] = useState([])
   useEffect(() => {
     const token = localStorage.getItem('token');
-    fetch(`http://172.31.0.214:5000/users/18`, {
+    const user_id = getUserIdFromToken(token)
+    fetch(`http://172.31.0.214:5000/users/${user_id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
@@ -48,8 +69,9 @@ const UserDashboard = (props) => {
   }, []);
   useEffect(()=>{
     const fetchParcelData = async () => {
-      const token = localStorage.getItem('token'); 
-      const res = await fetch(`http://172.31.0.214:5000/users/18/parcels`, {
+      const token = localStorage.getItem('token');
+      const user_id = getUserIdFromToken(token) 
+      const res = await fetch(`http://172.31.0.214:5000/users/${user_id}/parcels`, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
