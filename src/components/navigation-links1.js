@@ -20,35 +20,41 @@ const NavigationLinks1 = (props) => {
       <Link to="/maps" className="navigation-links-navlink3 navbar-link">
         {props.text4}
       </Link>
-      <div
-        data-thq="thq-dropdown"
-        className="navigation-links1-thq-dropdown list-item"
-      >
+      <div data-thq="thq-dropdown" className="navigation-links-thq-dropdown list-item">
+        <div data-thq="thq-dropdown-toggle" className="navigation-links-dropdown-toggle">
+          <span className="navigation-links-text1">{props.text3}</span>
+          <div data-thq="thq-dropdown-arrow" className="navigation-links-dropdown-arrow">
+            <svg viewBox="0 0 1024 1024" className="navigation-links-icon">
+              <path d="M426 726v-428l214 214z"></path>
+            </svg>
+          </div>
+        </div>
         <ul
           data-thq="thq-dropdown-list"
-          className="navigation-links1-dropdown-list"
+          className="navigation-links-dropdown-list"
         >
           <li
             data-thq="thq-dropdown"
-            className="navigation-links1-dropdown list-item"
+            className="navigation-links-dropdown list-item"
           >
-            <div
-              data-thq="thq-dropdown-toggle"
-              className="navigation-links1-dropdown-toggle"
-            >
-              <span className="navigation-links1-text1">{props.text6}</span>
-            </div>
+            <Link to="/new-delivery-order">
+              <div
+                data-thq="thq-dropdown-toggle"
+                className="navigation-links-dropdown-toggle1"
+              >
+                <span className="navigation-links-text2">{props.text6}</span>
+              </div>
+            </Link>
           </li>
-          <li
-            data-thq="thq-dropdown"
-            className="navigation-links1-dropdown1 list-item"
-          >
-            <div
-              data-thq="thq-dropdown-toggle"
-              className="navigation-links1-dropdown-toggle1"
-            >
-              <span className="navigation-links1-text2">{props.text7}</span>
-            </div>
+          <li data-thq="thq-dropdown" className="navigation-links-dropdown1 list-item">
+            <Link to="/delivery-order-summary">
+              <div
+                data-thq="thq-dropdown-toggle"
+                className="navigation-links-dropdown-toggle2"
+              >
+                <span className="navigation-links-text3">{props.text7}</span>
+              </div>
+            </Link>
           </li>
         </ul>
       </div>
