@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
-import Navbar from '../components/navbar';
+import Navbar1 from '../components/navbar1';
 import './DeliveryOrderSummary.css';
 
 // const getUserId = () => {
@@ -68,7 +68,7 @@ const DeliveryOrderSummary = () => {
   return (
     <div>
       <div className="delivery-order-summary-navbar">
-        <Navbar rootClassName="navbar-root-class-name"></Navbar>
+        <Navbar1 rootClassName="navbar-root-class-name"></Navbar1>
       </div>
       <div className="delivery-order-summary-container">
         <h2>Delivery Order Summary</h2>
