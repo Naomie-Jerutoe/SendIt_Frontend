@@ -1,9 +1,10 @@
-.center {
+.userscenter {
   position: relative;
-  padding: 20px 20px;
+  padding: 10px 10px;
   background: #fff;
   border-radius: 10px;
-  margin: 20px 590px 20px 50px;
+  width: 60vh;
+  margin: 10px 50px;
 }
 
 .center h3 {
@@ -12,7 +13,7 @@
   padding: 5px;
   color: #000;
   letter-spacing: 5px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   font-weight: bold;
   padding-left: 10px;
 }
@@ -21,7 +22,7 @@
   position: relative;
   width: 300px;
   height: 50px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .center .inputbox input {
   position: absolute;
@@ -52,24 +53,10 @@
   font-size: 1em;
 }
 
-.btn {
-  background: #7D30FA;
-  color: white;
-  padding: 5px 10px;
-  text-align: center;
+.button-wrapper{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+  padding-left: 10px;
+  margin-bottom: 5px;
 }
-.btn:hover {
-  color: #7D30FA;
-  background: white;
-  padding: 3px 8px;
-  border: 2px solid #7D30FA;
-}
-
-.btn2 {
-  background: #c609ec;
-  color: white;
-  padding: 5px 10px;
-  text-align: center;
-  margin: 10px 10px 0 0;
-}
-

@@ -39,19 +39,17 @@
   background: #f1f1f1;
 }
 
-.tableContainer{
+.usersTableContainer{
   height: 300px;
-  Overflow-y:scroll
+  Overflow-y:auto;
+  table-layout: fixed;
+  margin: auto 50px;
+  width: 100vh;
 }
 
-.styled-table {
-  border-collapse: collapse;
-  margin: 25px 0;
-  margin-left: 30px;
-  font-size: 0.9em;
-  font-family: sans-serif;
-  min-width: 400px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+.usersTableContainer thead, th {
+  position: sticky;
+  top: 0;
 }
 
 .styled-table thead tr {
