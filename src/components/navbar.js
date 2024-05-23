@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react'
+import { Link } from 'react-router-dom'
 
 import PropTypes from "prop-types";
 
@@ -9,8 +9,17 @@ import "./navbar.css";
 const Navbar = (props) => {
   return (
     <div className={`navbar-navbar-container ${props.rootClassName} `}>
-      <header data-role="Header" className="navigation-container">
-        <img alt={props.imageAlt} src={props.text6} className="navbar-image" />
+      <header
+        data-role="Header"
+        className="navbar-max-width navigation-container"
+      >
+        <Link to="/" className="">
+          <img
+            alt={props.imageAlt}
+            src={props.text6}
+            className="navbar-image"
+          />
+        </Link>
         <div className="navbar-nav">
           <NavigationLinks
             rootClassName="navigation-links-root-class-name10"
@@ -43,7 +52,10 @@ const Navbar = (props) => {
             </ul>
           </div>
         </div>
-        <div data-role="BurgerMenu" className="navigation-burger-menu">
+        <div
+          data-role="BurgerMenu"
+          className="navigation-burger-menu navbar-burger-menu"
+        >
           <svg viewBox="0 0 1024 1024" className="navbar-icon">
             <path
               d="M128 554.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 298.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 810.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"
@@ -68,12 +80,16 @@ const Navbar = (props) => {
                 </svg>
               </div>
             </div>
-            <button className="navbar-primary-btn button-primary button">
+            <Link
+              to="/signup"
+              className="navbar-primary-btn button-primary button"
+            >
               {props.primaryBtn1}
-            </button>
+            </Link>
             <NavigationLinks
               rootClassName="navigation-links-root-class-name11"
               className=""
+              text2="Services"
             ></NavigationLinks>
           </div>
           <div className="navbar-social-media">
@@ -119,9 +135,12 @@ const Navbar = (props) => {
             </div>
           </div>
         </div>
-        <button className="button-primary button navbar-primary-btn1">
-          <Link to="/signup">Log In/ Sign Up</Link>
-        </button>
+        <Link
+          to="/signup"
+          className="navbar-primary-btn1 button-primary button"
+        >
+          Log In/ Sign Up
+        </Link>
       </header>
     </div>
   );

@@ -6,6 +6,7 @@ import * as Yup from "yup";
 import zxcvbn from "zxcvbn";
 import { jwtDecode } from "jwt-decode";
 import "./signup.css";
+import { jwtDecode } from "jwt-decode";
 import classNames from "classnames";
 
 const Loader = () => (
@@ -14,6 +15,7 @@ const Loader = () => (
   </div>
 );
 
+const SignUp = (props) => {
 const PasswordInput = ({
   name,
   placeholder,
@@ -39,6 +41,14 @@ const PasswordInput = ({
 const SignUp = () => {
   const history = useHistory();
   const [isSignUp, setIsSignUp] = useState(false);
+
+  const handleSignUpClick = () => {
+    setIsSignUp(true);
+  };
+
+  const handleSignInClick = () => {
+    setIsSignUp(false);
+  };
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showLoginPassword, setShowLoginPassword] = useState(false);
@@ -81,21 +91,14 @@ const SignUp = () => {
 
   const signUpSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
-    email: Yup.string()
-      .email("Invalid email address")
-      .required("Email is required"),
+    email: Yup.string().email("Invalid email address").required("Email is required"),
     password: Yup.string()
       .min(8, "Password must be at least 8 characters")
       .required("Password is required"),
-    confirmPassword: Yup.string()
-      .oneOf([Yup.ref("password"), null], "Passwords do not match")
-      .required("Confirm Password is required"),
   });
 
   const signInSchema = Yup.object().shape({
-    email: Yup.string()
-      .email("Invalid email address")
-      .required("Email is required"),
+    email: Yup.string().email("Invalid email address").required("Email is required"),
     password: Yup.string().required("Password is required"),
   });
 
@@ -104,7 +107,6 @@ const SignUp = () => {
       name: "",
       email: "",
       password: "",
-      confirmPassword: "",
     },
     validationSchema: signUpSchema,
     onSubmit: async (values) => {
@@ -189,6 +191,8 @@ const SignUp = () => {
   });
 
   return (
+    <div className={`container ${isSignUp ? "active" : ""}`} id="container">
+      <div className={`form-container sign-up ${isSignUp ? "active" : ""}`}>
     <div
       className={classNames("container", {
         active: isSignUp,
@@ -223,6 +227,7 @@ const SignUp = () => {
           <input
             type="email"
             placeholder="Email"
+            id="email"
             name="email"
             onChange={signUpFormik.handleChange}
             value={signUpFormik.values.email}
@@ -230,6 +235,14 @@ const SignUp = () => {
           {signUpFormik.errors.email && (
             <div className="error-message">{signUpFormik.errors.email}</div>
           )}
+          <input
+            type="password"
+            placeholder="Password"
+            id="password"
+            name="password"
+            onChange={signUpFormik.handleChange}
+            value={signUpFormik.values.password}
+          />
           <PasswordInput
             name="password"
             placeholder="Password"
@@ -289,6 +302,7 @@ const SignUp = () => {
           <input
             type="email"
             placeholder="Email"
+            id="email"
             name="email"
             onChange={signInFormik.handleChange}
             value={signInFormik.values.email}
@@ -296,6 +310,14 @@ const SignUp = () => {
           {signInFormik.errors.email && (
             <div className="error-message">{signInFormik.errors.email}</div>
           )}
+          <input
+            type="password"
+            placeholder="Password"
+            id="password"
+            name="password"
+            onChange={signInFormik.handleChange}
+            value={signInFormik.values.password}
+          />
           <PasswordInput
             name="password"
             placeholder="Password"
@@ -326,6 +348,8 @@ const SignUp = () => {
           </div>
           <div className="toggle-panel toggle-right">
             <h1>Hello, Friend!</h1>
+            <p>Register with your personal details to use all of site features</p>
+            <button className="hidden" onClick={handleSignUpClick}>
             <p>
               Register with your personal details to use all of site features
             </p>

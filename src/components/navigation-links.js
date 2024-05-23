@@ -1,9 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
 import PropTypes from 'prop-types'
-
 import './navigation-links.css'
+import NewDeliveryOrder from '../views/NewDeliveryOrder';
+import DeliveryOrderSummary from '../views/DeliveryOrderSummary';
+import Services from '../views/services';
+import SignUp from '../views/signup';
 
 const NavigationLinks = (props) => {
   return (
@@ -14,11 +16,15 @@ const NavigationLinks = (props) => {
       <Link to="/about-page" className="navigation-links-navlink1 navbar-link">
         {props.text1}
       </Link>
-      <span className="navigation-links-text navbar-link">{props.text2}</span>
-      <span className="navigation-links-text1 navbar-link">{props.text4}</span>
-      <Link to="/contact-us" className="navigation-links-navlink2 navbar-link">
-        {props.text5}
+      <Link to="/services" className="navigation-links-navlink2 navbar-link">
+        {props.text2}
       </Link>
+
+      <Link to="/maps"className="navigation-links-text1 navbar-link">{props.text4}</Link>
+      <Link to="/contact-us" className="navigation-links-navlink2 navbar-link"
+      {props.text5}
+      </Link>
+      
       <div
         data-thq="thq-dropdown"
         className="navigation-links-thq-dropdown list-item"
@@ -27,7 +33,7 @@ const NavigationLinks = (props) => {
           data-thq="thq-dropdown-toggle"
           className="navigation-links-dropdown-toggle"
         >
-          <span className="navigation-links-text2">{props.text3}</span>
+          <span className="navigation-links-text1">{props.text3}</span>
           <div
             data-thq="thq-dropdown-arrow"
             className="navigation-links-dropdown-arrow"
@@ -45,23 +51,27 @@ const NavigationLinks = (props) => {
             data-thq="thq-dropdown"
             className="navigation-links-dropdown list-item"
           >
+            <Link to ="/new-delivery-order">
             <div
               data-thq="thq-dropdown-toggle"
               className="navigation-links-dropdown-toggle1"
             >
-              <span className="navigation-links-text3">{props.text6}</span>
+              <span className="navigation-links-text2">{props.text6}</span>
             </div>
+            </Link>
           </li>
           <li
             data-thq="thq-dropdown"
             className="navigation-links-dropdown1 list-item"
           >
+            <Link to="/delivery-order-summary">
             <div
               data-thq="thq-dropdown-toggle"
               className="navigation-links-dropdown-toggle2"
             >
-              <span className="navigation-links-text4">{props.text7}</span>
+              <span className="navigation-links-text3">{props.text7}</span>
             </div>
+            </Link>
           </li>
         </ul>
       </div>
