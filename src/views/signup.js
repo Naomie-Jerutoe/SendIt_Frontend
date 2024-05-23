@@ -1,20 +1,12 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import {
-  FaGooglePlusG,
-  FaFacebookF,
-  FaGithub,
-  FaLinkedinIn,
-  FaEyeSlash,
-  FaEye,
-  FaSpinner,
-} from "react-icons/fa";
+import { FaEyeSlash, FaEye, FaSpinner } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import zxcvbn from "zxcvbn";
+import { jwtDecode } from "jwt-decode";
 import "./signup.css";
-import {jwtDecode} from "jwt-decode";
 
 const Loader = () => (
   <div className="loader-container">
@@ -116,53 +108,43 @@ const SignUp = (props) => {
       confirmPassword: "",
     },
     validationSchema: signUpSchema,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       setIsLoading(true);
-      const handleSubmit = (values) => {
-        fetch("https://sendit-backend-qhth.onrender.com/signup", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            username: values.name,
-            email: values.email,
-            password: values.password,
-            is_admin: false,
-          }),
-        })
-          .then((response) => {
-            if (response.ok) {
-              return response.json();
-            } else if (response.status === 400 || response.status === 409) {
-              setIsSignUp(false);
-              throw new Error("User already exists");
-            } else {
-              throw new Error(`Sign up failed with status ${response.status}`);
-            }
-          })
-          .then((data) => {
-            setIsLoading(false);
-            if (data.success) {
-              alert("Sign up successful");
-              history.push("/");
-            } else {
-              console.error("Sign up failed:", data.message);
-              alert(data.message);
-            }
-          })
-          .catch((err) => {
-            setIsLoading(false);
-            if (err.message === "User already exists") {
-              alert("User already exists. Please log in instead.");
-            } else {
-              console.error(err);
-              alert("An error occurred during sign up.");
-            }
-          });
-        signUpFormik.resetForm();
-      };
-      handleSubmit(values);
+      try {
+        const response = await fetch(
+          "https://sendit-backend-qhth.onrender.com/signup",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              username: values.name,
+              email: values.email,
+              password: values.password,
+              is_admin: false,
+            }),
+          }
+        );
+        const data = await response.json();
+        setIsLoading(false);
+
+        if (response.ok) {
+          alert("Sign up successful");
+          history.push("/");
+        } else if (response.status === 400 || response.status === 409) {
+          setIsSignUp(false);
+          throw new Error(data.message || "User already exists. Please Log in");
+        } else {
+          throw new Error(
+            data.message || `Sign up failed with status ${response.status}`
+          );
+        }
+      } catch (error) {
+        setIsLoading(false);
+        alert(error.message);
+      }
+      signUpFormik.resetForm();
     },
   });
 
@@ -173,7 +155,7 @@ const SignUp = (props) => {
     },
     validationSchema: signInSchema,
     onSubmit: async (values) => {
-      setIsLoading(true); // Start loading
+      setIsLoading(true);
       try {
         const response = await fetch(
           "https://sendit-backend-qhth.onrender.com/login",
@@ -189,7 +171,7 @@ const SignUp = (props) => {
           }
         );
         const data = await response.json();
-        setIsLoading(false); // Stop loading
+        setIsLoading(false);
 
         if (data.token) {
           localStorage.setItem("token", data.token);
@@ -203,7 +185,7 @@ const SignUp = (props) => {
           throw new Error(data.message || "Login failed");
         }
       } catch (error) {
-        setIsLoading(false); // Stop loading
+        setIsLoading(false);
         alert(error.message);
       }
     },
@@ -225,21 +207,7 @@ const SignUp = (props) => {
             alt="Logo"
           />
           <h1>Create Account</h1>
-          <div className="social-icons">
-            <a href="#" className="icon" id="google">
-              <FaGooglePlusG />
-            </a>
-            <a href="#" className="icon" id="facebook">
-              <FaFacebookF />
-            </a>
-            <a href="#" className="icon" id="github">
-              <FaGithub />
-            </a>
-            <a href="#" className="icon" id="linkedin">
-              <FaLinkedinIn />
-            </a>
-          </div>
-          <span>or use your email for registration</span>
+          <h5>Use your email for registration</h5>
           <input
             type="text"
             placeholder="Name"
@@ -358,8 +326,8 @@ const SignUp = (props) => {
           <Link to="/reset-password" className="reset">
             Forgot Your password?
           </Link>
-          <button className="signup" type="submit" disabled={isLoading}>
-            {isLoading ? <Loader /> : "Sign In"}
+          <button className="signup" type="submit">
+            Sign In
           </button>
         </form>
       </div>
