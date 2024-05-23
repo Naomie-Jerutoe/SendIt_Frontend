@@ -1,18 +1,23 @@
 import React from 'react'
+import "./ParcelDetail.css"
 
 function ParcelDetail({parcel, onClose}) {
   return (
-    <div>
-      <span className="close" onClick={onClose}>&times;</span>
-      <h1>Parcel Details: </h1>
-      <p>ID: {parcel.id}</p>
-      <p>Pickup Location: {parcel.pickup_location}</p>
-      <p>Destination: {parcel.destination}</p>
-      <p>Weight: {parcel.weight}</p>
-      <p>Price: {parcel.price}</p>
-      <p>Description: {parcel.description}</p>
-      <p>Status: {parcel.status}</p>
-      <p>User ID: {parcel.user_id}</p>
+    <div className='parceldetailcard'>
+      <div className='parcelcardheader'>
+        <span className="close" onClick={onClose}>&times;</span>
+        <h2>Parcel Details: </h2>
+      </div>
+      <div className='my-parcel-detail'>
+          <p><strong>ID: </strong>{parcel.id}</p>
+          <p><strong>Pickup Location: </strong>{parcel.pickup_location}</p>
+          <p><strong>Destination: </strong>{parcel.destination}</p>
+          <p><strong>Weight: </strong>{parcel.weight}</p>
+          <p><strong>Price: </strong>{parcel.price}</p>
+          <p><strong>Description: </strong>{parcel.description}</p>
+          <p><strong>Status: </strong>{parcel.status}</p>
+          <p><strong>User ID: </strong>{parcel.user_id}</p>
+      </div>
     </div>
   );
 }

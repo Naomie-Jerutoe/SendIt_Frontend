@@ -3,6 +3,10 @@ import { Link } from "react-router-dom";
 import "./Users.css";
 import help from "../Dashboard/help-web-button.png";
 import dash from "../Dashboard/dashboard (2).png";
+import musers from "../Dashboard/users2.png";
+import parcels2 from "../Dashboard/parcels2.png";
+import stat from "../Dashboard/status.png";
+import prof from "../Dashboard/profile.png";
 import UserModal from "./UserModal"; 
 
 function Users() {
@@ -11,9 +15,6 @@ function Users() {
   const [showModal, setShowModal] = useState(false);
 
   const fetchUsers = () => {
-    // const startIndex = (currentPage - 1) * 5;
-    // const endIndex = startIndex + 5;
-
     fetch(`https://sendit-backend-qhth.onrender.com/users`, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -25,18 +26,14 @@ function Users() {
       } 
       return response.json()
     })
-    .then(data => setUsers(prevUsers => [...prevUsers, ...data]))
-    // .then(data => setUsers(data))
+    // .then(data => setUsers(prevUsers => [...prevUsers, ...data]))
+    .then(data => setUsers(data))
     .catch(error => console.error('Error fetching users:', error));
   };
 
   useEffect(() => {
     fetchUsers();
   }, []);
-
-  // const handleShowMore = () => {
-  //   setCurrentPage(prevPage => prevPage + 1);
-  // };
 
   const handleView = (user) => {
     setSelectedUser(user);
@@ -56,16 +53,17 @@ function Users() {
         </div>
         <ul>
           <Link to={'/admin_dashboard'}><li><img src={dash} alt="" />&nbsp; <span>Dashboard</span></li></Link>
-          <Link to={'/admin_users'}><li><img src="" alt="" />&nbsp; <span>Users</span></li></Link>
-          <Link to={'/admin_parcels'}><li><img src="" alt="" />&nbsp; <span>Parcels</span></li></Link>
-          <Link to={'/admin_orders'}><li><img src="" alt="" />&nbsp; <span>Orders</span></li></Link>
+          <Link to={'/admin_users'}><li><img src={musers} alt="" />&nbsp; <span>Users</span></li></Link>
+          <Link to={'/admin_parcels'}><li><img src={parcels2} alt="" />&nbsp; <span>Parcels</span></li></Link>
+          <Link to={'/admin_orders'}><li><img src={stat} alt="" />&nbsp; <span>Orders</span></li></Link>
+          <Link to={'/admin_profile'}><li><img src={prof} alt="" />&nbsp; <span>My Profile</span></li></Link>
           <Link to={'/help'}><li><img src={help} alt="" />&nbsp; <span>Help</span></li></Link>{" "}
         </ul>
       </div>
       <div className="container">
-          <div className="tableContainer">
-            <h1>USERS</h1>
-              <table className="styled-table">
+          <h1>USERS</h1>
+          <div className="usersTableContainer">
+              <table>
                 <thead>
                   <tr>
                     <th>ID</th>
@@ -81,13 +79,12 @@ function Users() {
                       <td>{user.username}</td>
                       <td>{user.email}</td>
                       <td>
-                        <button onClick={() => handleView(user)}>View</button>
+                        <button onClick={() => handleView(user)} className="bttn">View</button>
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
-            {/* <button onClick={handleShowMore}>See More</button> */}
         </div>
         {showModal && (
           <UserModal user={selectedUser} onClose={handleCloseModal} />
