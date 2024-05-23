@@ -67,9 +67,9 @@ function Parcels() {
   };
 
   return (
-    <div className="main">
-      <div className="side-menu">
-        <div className="brand-name">
+    <div className="admin-main">
+      <div className="admin-side-menu">
+        <div className="admin-brand-name">
           <h1>SendIt</h1>
         </div>
         <ul>
@@ -81,7 +81,7 @@ function Parcels() {
           <Link to={'/help'}><li><img src={help} alt="" />&nbsp; <span>Help</span></li></Link>{" "}
         </ul>
       </div>
-      <div className="container">
+      <div className="admin-container">
           <div>
               <h1>PARCELS</h1>
               <div className="tableContainer">
@@ -111,7 +111,7 @@ function Parcels() {
                       <td>{parcel.status}</td>
                       <td>{parcel.user_id}</td>
                       <td>
-                        <button onClick={() => handleViewDetails(parcel.id)} className="bttn">View</button>
+                        <button onClick={() => handleViewDetails(parcel.id)} className="admin-bttn">View</button>
                       </td>
                     </tr>
                   ))}

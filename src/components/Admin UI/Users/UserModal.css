@@ -1,4 +1,4 @@
-.userscenter {
+.admin-users-center {
   position: relative;
   padding: 10px 10px;
   background: #fff;
@@ -7,7 +7,7 @@
   margin: 10px 50px;
 }
 
-.center h3 {
+.admin-users-center h3 {
   font-size: 2em;
   border-left: 5px solid #7D30FA;
   padding: 5px;
@@ -18,13 +18,13 @@
   padding-left: 10px;
 }
 
-.center .inputbox {
+.admin-users-center .admin-inputbox {
   position: relative;
   width: 300px;
   height: 50px;
   margin-bottom: 10px;
 }
-.center .inputbox input {
+.admin-users-center .admin-inputbox input {
   position: absolute;
   top: 0;
   left: 0;
@@ -36,10 +36,10 @@
   border-radius: 10px;
   font-size: 1.2em;
 }
-.center .inputbox:last-child {
+.admin-users-center .admin-inputbox:last-child {
   margin-bottom: 0;
 }
-.center .inputbox span {
+.admin-users-center .admin-inputbox span {
   position: absolute;
   top: 14px;
   left: 20px;
@@ -47,16 +47,15 @@
   transition: 0.6s;
   font-family: sans-serif;
 }
-.center .inputbox input:focus ~ span,
-.center .inputbox input:valid ~ span {
+.admin-users-center .admin-inputbox input:focus ~ span,
+.admin-users-center .admin-inputbox input:valid ~ span {
   transform: translateX(-13px) translateY(-35px);
   font-size: 1em;
 }
 
-.button-wrapper{
+.admin-button-wrapper{
   display: flex;
   justify-content: space-between;
   margin-top: 5px;
-  padding-left: 10px;
   margin-bottom: 5px;
 }

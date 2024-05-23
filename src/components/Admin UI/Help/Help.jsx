@@ -9,9 +9,9 @@ import prof from "../Dashboard/profile.png";
 
 function Help() {
   return (
-    <div className="main">
-      <div className="side-menu">
-        <div className="brand-name">
+    <div className="admin-main">
+      <div className="admin-side-menu">
+        <div className="admin-brand-name">
           <h1>SendIt</h1>
         </div>
         <ul>
@@ -23,8 +23,8 @@ function Help() {
           <Link to={'/help'}><li><img src={help} alt="" />&nbsp; <span>Help</span></li></Link>{" "}
         </ul>
       </div>
-      <div className="container">
-          <h1>HELP</h1>
+      <div className="admin-container">
+        <h1>Help</h1>
       </div>
     </div>
   )

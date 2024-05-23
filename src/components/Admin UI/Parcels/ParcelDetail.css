@@ -1,7 +1,7 @@
 .parceldetailcard {
   margin: 50px auto;
   width: 95%;
-  border: 1px #7D30FA solid;
+  border: 2px #7D30FA solid;
 }
 
 .parcelcardheader {
@@ -14,6 +14,7 @@
 .my-parcel-detail{
   display: flex;
   justify-content: space-between;
+  padding: 10px;
 }
 
 h3{
