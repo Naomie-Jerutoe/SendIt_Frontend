@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
-import Navbar1 from '../components/navbar1';
+import Navbar1 from '../components/navbar';
 import Footer from '../components/footer';
 import './NewDeliveryOrder.css';
 
@@ -196,7 +196,7 @@ const NewDeliveryOrder = () => {
           <Link to="user-dashboard">Go to previous page</Link>
         </button>
         <button className="view-order-summary-button">
-          <Link to={`/delivery-order-summary/${userId}`}>View Order Summary</Link>
+          <Link to={`/delivery-order-summary`}>View Order Summary</Link>
         </button>
         </div>
       </div>

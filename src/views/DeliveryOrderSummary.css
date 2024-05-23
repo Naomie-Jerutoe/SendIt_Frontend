@@ -29,3 +29,49 @@
 .delivery-order-summary-container div p {
   margin: 0;
 }
+
+
+.order-item {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-bottom: 20px;
+  width: 700px;
+  /* margin-top: 10px; */
+}
+.order-item:hover {
+  background-color: rgb(219, 197, 236);
+}
+
+.order-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+
+}
+
+.cancel-order-btn,
+.change-destination-btn {
+  padding: 8px 16px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cancel-order-btn {
+  background-color: #f44336;
+  color: #fff;
+}
+
+.change-destination-btn {
+  background-color: #4caf50;
+  color: #fff;
+}
+.order-details {
+  display: flex;
+  justify-content: space-between;
+}
+.order-item h3 {
+  margin-bottom: var(--dl-space-space-halfunit);
+  text-align: center;
+}
