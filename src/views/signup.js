@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { FaEyeSlash, FaEye, FaSpinner } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import zxcvbn from "zxcvbn";
 import { jwtDecode } from "jwt-decode";
 import "./signup.css";
-import { jwtDecode } from "jwt-decode";
-import classNames from "classnames";
 
 const Loader = () => (
   <div className="loader-container">
@@ -16,39 +15,9 @@ const Loader = () => (
 );
 
 const SignUp = (props) => {
-const PasswordInput = ({
-  name,
-  placeholder,
-  showPassword,
-  handleShowPassword,
-  handleChange,
-  value,
-}) => (
-  <div className="password-input-container">
-    <input
-      type={showPassword ? "text" : "password"}
-      placeholder={placeholder}
-      name={name}
-      onChange={handleChange}
-      value={value}
-    />
-    <span className="show-password-btn" onClick={handleShowPassword}>
-      {showPassword ? <FaEyeSlash /> : <FaEye />}
-    </span>
-  </div>
-);
-
-const SignUp = () => {
   const history = useHistory();
+
   const [isSignUp, setIsSignUp] = useState(false);
-
-  const handleSignUpClick = () => {
-    setIsSignUp(true);
-  };
-
-  const handleSignInClick = () => {
-    setIsSignUp(false);
-  };
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showLoginPassword, setShowLoginPassword] = useState(false);
@@ -57,11 +26,33 @@ const SignUp = () => {
   const [passwordStrengthText, setPasswordStrengthText] = useState("");
   const [passwordStrengthColor, setPasswordStrengthColor] = useState("red");
 
+  const handleSignUpClick = () => {
+    setIsSignUp(true);
+  };
+
+  const handleSignInClick = () => {
+    setIsSignUp(false);
+  };
+
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleShowConfirmPassword = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
+
+  const handleShowLoginPassword = () => {
+    setShowLoginPassword(!showLoginPassword);
+  };
+
   const handlePasswordChange = (event) => {
     const password = event.target.value;
     signUpFormik.handleChange(event);
+
     const result = zxcvbn(password);
     setPasswordStrength(result.score);
+
     switch (result.score) {
       case 0:
         setPasswordStrengthText("Too weak");
@@ -91,14 +82,21 @@ const SignUp = () => {
 
   const signUpSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
-    email: Yup.string().email("Invalid email address").required("Email is required"),
+    email: Yup.string()
+      .email("Invalid email address")
+      .required("Email is required"),
     password: Yup.string()
       .min(8, "Password must be at least 8 characters")
       .required("Password is required"),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref("password"), null], "Passwords do not match")
+      .required("Confirm Password is required"),
   });
 
   const signInSchema = Yup.object().shape({
-    email: Yup.string().email("Invalid email address").required("Email is required"),
+    email: Yup.string()
+      .email("Invalid email address")
+      .required("Email is required"),
     password: Yup.string().required("Password is required"),
   });
 
@@ -107,6 +105,7 @@ const SignUp = () => {
       name: "",
       email: "",
       password: "",
+      confirmPassword: "",
     },
     validationSchema: signUpSchema,
     onSubmit: async (values) => {
@@ -129,9 +128,10 @@ const SignUp = () => {
         );
         const data = await response.json();
         setIsLoading(false);
+
         if (response.ok) {
-          alert("Sign up successful.Please login");
-          setIsSignUp(false);
+          alert("Sign up successful");
+          history.push("/");
         } else if (response.status === 400 || response.status === 409) {
           setIsSignUp(false);
           throw new Error(data.message || "User already exists. Please Log in");
@@ -172,6 +172,7 @@ const SignUp = () => {
         );
         const data = await response.json();
         setIsLoading(false);
+
         if (data.token) {
           localStorage.setItem("token", data.token);
           const accessToken = jwtDecode(data.token);
@@ -191,21 +192,14 @@ const SignUp = () => {
   });
 
   return (
-    <div className={`container ${isSignUp ? "active" : ""}`} id="container">
-      <div className={`form-container sign-up ${isSignUp ? "active" : ""}`}>
     <div
-      className={classNames("container", {
-        active: isSignUp,
-        loading: isLoading,
-      })}
+      className={`container ${isSignUp ? "active" : ""} ${
+        isLoading ? "loading" : ""
+      }`}
       id="container"
     >
       {isLoading && <Loader />}
-      <div
-        className={classNames("form-container", "sign-up", {
-          active: isSignUp,
-        })}
-      >
+      <div className={`form-container sign-up ${isSignUp ? "active" : ""}`}>
         <form onSubmit={signUpFormik.handleSubmit}>
           <img
             className="image"
@@ -217,6 +211,7 @@ const SignUp = () => {
           <input
             type="text"
             placeholder="Name"
+            id="name"
             name="name"
             onChange={signUpFormik.handleChange}
             value={signUpFormik.values.name}
@@ -227,7 +222,7 @@ const SignUp = () => {
           <input
             type="email"
             placeholder="Email"
-            id="email"
+            className="email"
             name="email"
             onChange={signUpFormik.handleChange}
             value={signUpFormik.values.email}
@@ -235,22 +230,19 @@ const SignUp = () => {
           {signUpFormik.errors.email && (
             <div className="error-message">{signUpFormik.errors.email}</div>
           )}
-          <input
-            type="password"
-            placeholder="Password"
-            id="password"
-            name="password"
-            onChange={signUpFormik.handleChange}
-            value={signUpFormik.values.password}
-          />
-          <PasswordInput
-            name="password"
-            placeholder="Password"
-            showPassword={showPassword}
-            handleShowPassword={() => setShowPassword(!showPassword)}
-            handleChange={handlePasswordChange}
-            value={signUpFormik.values.password}
-          />
+          <div className="password-input-container">
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              className="password"
+              name="password"
+              onChange={handlePasswordChange}
+              value={signUpFormik.values.password}
+            />
+            <span className="show-password-btn" onClick={handleShowPassword}>
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
+          </div>
           <div className="password-strength-indicator">
             <div
               className={`strength-bar strength-${passwordStrength}`}
@@ -266,16 +258,22 @@ const SignUp = () => {
           {signUpFormik.errors.password && (
             <div className="error-message">{signUpFormik.errors.password}</div>
           )}
-          <PasswordInput
-            name="confirmPassword"
-            placeholder="Confirm Password"
-            showPassword={showConfirmPassword}
-            handleShowPassword={() =>
-              setShowConfirmPassword(!showConfirmPassword)
-            }
-            handleChange={signUpFormik.handleChange}
-            value={signUpFormik.values.confirmPassword}
-          />
+          <div className="password-input-container">
+            <input
+              type={showConfirmPassword ? "text" : "password"}
+              placeholder="Confirm Password"
+              id="confirmPassword"
+              name="confirmPassword"
+              onChange={signUpFormik.handleChange}
+              value={signUpFormik.values.confirmPassword}
+            />
+            <span
+              className="show-password-btn"
+              onClick={handleShowConfirmPassword}
+            >
+              {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
+          </div>
           {signUpFormik.errors.confirmPassword && (
             <div className="error-message">
               {signUpFormik.errors.confirmPassword}
@@ -286,11 +284,7 @@ const SignUp = () => {
           </button>
         </form>
       </div>
-      <div
-        className={classNames("form-container", "sign-in", {
-          active: !isSignUp,
-        })}
-      >
+      <div className={`form-container sign-in ${isSignUp ? "" : "active"}`}>
         <form onSubmit={signInFormik.handleSubmit}>
           <img
             className="image"
@@ -302,7 +296,7 @@ const SignUp = () => {
           <input
             type="email"
             placeholder="Email"
-            id="email"
+            className="email"
             name="email"
             onChange={signInFormik.handleChange}
             value={signInFormik.values.email}
@@ -310,22 +304,22 @@ const SignUp = () => {
           {signInFormik.errors.email && (
             <div className="error-message">{signInFormik.errors.email}</div>
           )}
-          <input
-            type="password"
-            placeholder="Password"
-            id="password"
-            name="password"
-            onChange={signInFormik.handleChange}
-            value={signInFormik.values.password}
-          />
-          <PasswordInput
-            name="password"
-            placeholder="Password"
-            showPassword={showLoginPassword}
-            handleShowPassword={() => setShowLoginPassword(!showLoginPassword)}
-            handleChange={signInFormik.handleChange}
-            value={signInFormik.values.password}
-          />
+          <div className="password-input-container">
+            <input
+              type={showLoginPassword ? "text" : "password"}
+              placeholder="Password"
+              className="password"
+              name="password"
+              onChange={signInFormik.handleChange}
+              value={signInFormik.values.password}
+            />
+            <span
+              className="show-password-btn"
+              onClick={handleShowLoginPassword}
+            >
+              {showLoginPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
+          </div>
           {signInFormik.errors.password && (
             <div className="error-message">{signInFormik.errors.password}</div>
           )}
@@ -342,18 +336,16 @@ const SignUp = () => {
           <div className="toggle-panel toggle-left">
             <h1>Welcome Back!</h1>
             <p>Enter your personal details to use all of site features</p>
-            <button className="hidden" onClick={() => setIsSignUp(false)}>
+            <button className="hidden" onClick={handleSignInClick}>
               Sign In
             </button>
           </div>
           <div className="toggle-panel toggle-right">
             <h1>Hello, Friend!</h1>
-            <p>Register with your personal details to use all of site features</p>
-            <button className="hidden" onClick={handleSignUpClick}>
             <p>
               Register with your personal details to use all of site features
             </p>
-            <button className="hidden" onClick={() => setIsSignUp(true)}>
+            <button className="hidden" onClick={handleSignUpClick}>
               Sign Up
             </button>
           </div>
