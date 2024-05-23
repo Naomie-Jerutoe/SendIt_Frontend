@@ -5,6 +5,7 @@
   "dependencies": {
     "@craco/craco": "^7.0.0-alpha.0",
     "axios": "^1.6.8",
+    "classnames": "^2.5.1",
     "formik": "^2.4.6",
     "jwt-decode": "^4.0.0",
     "prop-types": "15.7.2",

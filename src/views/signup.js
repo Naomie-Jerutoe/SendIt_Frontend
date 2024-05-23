@@ -1,20 +1,12 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import {
-  FaGooglePlusG,
-  FaFacebookF,
-  FaGithub,
-  FaLinkedinIn,
-  FaEyeSlash,
-  FaEye,
-  FaSpinner,
-} from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
+import { FaEyeSlash, FaEye, FaSpinner } from "react-icons/fa";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import zxcvbn from "zxcvbn";
 import { jwtDecode } from "jwt-decode";
 import "./signup.css";
+import classNames from "classnames";
 
 const Loader = () => (
   <div className="loader-container">
@@ -22,9 +14,30 @@ const Loader = () => (
   </div>
 );
 
-const SignUp = (props) => {
-  const history = useHistory();
+const PasswordInput = ({
+  name,
+  placeholder,
+  showPassword,
+  handleShowPassword,
+  handleChange,
+  value,
+}) => (
+  <div className="password-input-container">
+    <input
+      type={showPassword ? "text" : "password"}
+      placeholder={placeholder}
+      name={name}
+      onChange={handleChange}
+      value={value}
+    />
+    <span className="show-password-btn" onClick={handleShowPassword}>
+      {showPassword ? <FaEyeSlash /> : <FaEye />}
+    </span>
+  </div>
+);
 
+const SignUp = () => {
+  const history = useHistory();
   const [isSignUp, setIsSignUp] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -34,33 +47,11 @@ const SignUp = (props) => {
   const [passwordStrengthText, setPasswordStrengthText] = useState("");
   const [passwordStrengthColor, setPasswordStrengthColor] = useState("red");
 
-  const handleSignUpClick = () => {
-    setIsSignUp(true);
-  };
-
-  const handleSignInClick = () => {
-    setIsSignUp(false);
-  };
-
-  const handleShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const handleShowConfirmPassword = () => {
-    setShowConfirmPassword(!showConfirmPassword);
-  };
-
-  const handleShowLoginPassword = () => {
-    setShowLoginPassword(!showLoginPassword);
-  };
-
   const handlePasswordChange = (event) => {
     const password = event.target.value;
     signUpFormik.handleChange(event);
-
     const result = zxcvbn(password);
     setPasswordStrength(result.score);
-
     switch (result.score) {
       case 0:
         setPasswordStrengthText("Too weak");
@@ -136,10 +127,9 @@ const SignUp = (props) => {
         );
         const data = await response.json();
         setIsLoading(false);
-
         if (response.ok) {
-          alert("Sign up successful");
-          history.push("/");
+          alert("Sign up successful.Please login");
+          setIsSignUp(false);
         } else if (response.status === 400 || response.status === 409) {
           setIsSignUp(false);
           throw new Error(data.message || "User already exists. Please Log in");
@@ -180,7 +170,6 @@ const SignUp = (props) => {
         );
         const data = await response.json();
         setIsLoading(false);
-
         if (data.token) {
           localStorage.setItem("token", data.token);
           const accessToken = jwtDecode(data.token);
@@ -201,13 +190,18 @@ const SignUp = (props) => {
 
   return (
     <div
-      className={`container ${isSignUp ? "active" : ""} ${
-        isLoading ? "loading" : ""
-      }`}
+      className={classNames("container", {
+        active: isSignUp,
+        loading: isLoading,
+      })}
       id="container"
     >
       {isLoading && <Loader />}
-      <div className={`form-container sign-up ${isSignUp ? "active" : ""}`}>
+      <div
+        className={classNames("form-container", "sign-up", {
+          active: isSignUp,
+        })}
+      >
         <form onSubmit={signUpFormik.handleSubmit}>
           <img
             className="image"
@@ -219,7 +213,6 @@ const SignUp = (props) => {
           <input
             type="text"
             placeholder="Name"
-            id="name"
             name="name"
             onChange={signUpFormik.handleChange}
             value={signUpFormik.values.name}
@@ -230,7 +223,6 @@ const SignUp = (props) => {
           <input
             type="email"
             placeholder="Email"
-            className="email"
             name="email"
             onChange={signUpFormik.handleChange}
             value={signUpFormik.values.email}
@@ -238,19 +230,14 @@ const SignUp = (props) => {
           {signUpFormik.errors.email && (
             <div className="error-message">{signUpFormik.errors.email}</div>
           )}
-          <div className="password-input-container">
-            <input
-              type={showPassword ? "text" : "password"}
-              placeholder="Password"
-              className="password"
-              name="password"
-              onChange={handlePasswordChange}
-              value={signUpFormik.values.password}
-            />
-            <span className="show-password-btn" onClick={handleShowPassword}>
-              {showPassword ? <FaEyeSlash /> : <FaEye />}
-            </span>
-          </div>
+          <PasswordInput
+            name="password"
+            placeholder="Password"
+            showPassword={showPassword}
+            handleShowPassword={() => setShowPassword(!showPassword)}
+            handleChange={handlePasswordChange}
+            value={signUpFormik.values.password}
+          />
           <div className="password-strength-indicator">
             <div
               className={`strength-bar strength-${passwordStrength}`}
@@ -266,22 +253,16 @@ const SignUp = (props) => {
           {signUpFormik.errors.password && (
             <div className="error-message">{signUpFormik.errors.password}</div>
           )}
-          <div className="password-input-container">
-            <input
-              type={showConfirmPassword ? "text" : "password"}
-              placeholder="Confirm Password"
-              id="confirmPassword"
-              name="confirmPassword"
-              onChange={signUpFormik.handleChange}
-              value={signUpFormik.values.confirmPassword}
-            />
-            <span
-              className="show-password-btn"
-              onClick={handleShowConfirmPassword}
-            >
-              {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
-            </span>
-          </div>
+          <PasswordInput
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            showPassword={showConfirmPassword}
+            handleShowPassword={() =>
+              setShowConfirmPassword(!showConfirmPassword)
+            }
+            handleChange={signUpFormik.handleChange}
+            value={signUpFormik.values.confirmPassword}
+          />
           {signUpFormik.errors.confirmPassword && (
             <div className="error-message">
               {signUpFormik.errors.confirmPassword}
@@ -292,7 +273,11 @@ const SignUp = (props) => {
           </button>
         </form>
       </div>
-      <div className={`form-container sign-in ${isSignUp ? "" : "active"}`}>
+      <div
+        className={classNames("form-container", "sign-in", {
+          active: !isSignUp,
+        })}
+      >
         <form onSubmit={signInFormik.handleSubmit}>
           <img
             className="image"
@@ -304,7 +289,6 @@ const SignUp = (props) => {
           <input
             type="email"
             placeholder="Email"
-            className="email"
             name="email"
             onChange={signInFormik.handleChange}
             value={signInFormik.values.email}
@@ -312,22 +296,14 @@ const SignUp = (props) => {
           {signInFormik.errors.email && (
             <div className="error-message">{signInFormik.errors.email}</div>
           )}
-          <div className="password-input-container">
-            <input
-              type={showLoginPassword ? "text" : "password"}
-              placeholder="Password"
-              className="password"
-              name="password"
-              onChange={signInFormik.handleChange}
-              value={signInFormik.values.password}
-            />
-            <span
-              className="show-password-btn"
-              onClick={handleShowLoginPassword}
-            >
-              {showLoginPassword ? <FaEyeSlash /> : <FaEye />}
-            </span>
-          </div>
+          <PasswordInput
+            name="password"
+            placeholder="Password"
+            showPassword={showLoginPassword}
+            handleShowPassword={() => setShowLoginPassword(!showLoginPassword)}
+            handleChange={signInFormik.handleChange}
+            value={signInFormik.values.password}
+          />
           {signInFormik.errors.password && (
             <div className="error-message">{signInFormik.errors.password}</div>
           )}
@@ -344,7 +320,7 @@ const SignUp = (props) => {
           <div className="toggle-panel toggle-left">
             <h1>Welcome Back!</h1>
             <p>Enter your personal details to use all of site features</p>
-            <button className="hidden" onClick={handleSignInClick}>
+            <button className="hidden" onClick={() => setIsSignUp(false)}>
               Sign In
             </button>
           </div>
@@ -353,7 +329,7 @@ const SignUp = (props) => {
             <p>
               Register with your personal details to use all of site features
             </p>
-            <button className="hidden" onClick={handleSignUpClick}>
+            <button className="hidden" onClick={() => setIsSignUp(true)}>
               Sign Up
             </button>
           </div>
