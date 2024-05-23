@@ -44,7 +44,7 @@ function Dashboard() {
               <div className="img-case">
                 <Link to={'/admin_profile'}><img src={logo} alt="" title="My profile"/></Link> 
               </div>
-              <Link to={'/logout'}><a href="#" className="btn" title="Logout">
+              <Link to={'/signup'}><a href="#" className="btn" title="Logout">
                 Logout
               </a></Link>
             </div>
