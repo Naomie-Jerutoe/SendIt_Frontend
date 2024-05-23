@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
-import Navbar from '../components/navbar';
+import Navbar1 from '../components/navbar1';
 import Footer from '../components/footer';
 import './NewDeliveryOrder.css';
 
@@ -190,13 +190,13 @@ const NewDeliveryOrder = () => {
   return (
     <div className="new-delivery-order-container">
       <div className="new-delivery-order-navbar">
-        <Navbar rootClassName="navbar-root-class-name"></Navbar>
+        <Navbar1 rootClassName="navbar-root-class-name"></Navbar1>
         <div className="orders-buttons">
         <button className="back-button">
           <Link to="user-dashboard">Go to previous page</Link>
         </button>
         <button className="view-order-summary-button">
-          <Link to={`/delivery-order-summary/${userId}`}>View Order Summary</Link>
+          <Link to={`/delivery-order-summary`}>View Order Summary</Link>
         </button>
         </div>
       </div>
