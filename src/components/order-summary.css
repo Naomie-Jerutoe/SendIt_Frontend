@@ -9,6 +9,7 @@
   color: var(--dl-color-theme-secondary2);
   margin-left: var(--dl-space-space-halfunit);
   margin-bottom: var(--dl-space-space-unit);
+
 }
 .order-summary-container01 {
   flex: 0 0 auto;

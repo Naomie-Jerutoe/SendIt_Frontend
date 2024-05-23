@@ -2,6 +2,10 @@ import { Link } from "react-router-dom";
 import "./Parcels.css";
 import help from "../Dashboard/help-web-button.png"
 import dash from "../Dashboard/dashboard (2).png"
+import musers from "../Dashboard/users2.png";
+import parcels2 from "../Dashboard/parcels2.png";
+import stat from "../Dashboard/status.png";
+import prof from "../Dashboard/profile.png";
 import { useState, useEffect } from "react";
 import ParcelDetail from "./ParcelDetail";
 
@@ -70,9 +74,10 @@ function Parcels() {
         </div>
         <ul>
           <Link to={'/admin_dashboard'}><li><img src={dash} alt="" />&nbsp; <span>Dashboard</span></li></Link>
-          <Link to={'/admin_users'}><li><img src="" alt="" />&nbsp; <span>Users</span></li></Link>
-          <Link to={'/admin_parcels'}><li><img src="" alt="" />&nbsp; <span>Parcels</span></li></Link>
-          <Link to={'/admin_orders'}><li><img src="" alt="" />&nbsp; <span>Orders</span></li></Link>
+          <Link to={'/admin_users'}><li><img src={musers} alt="" />&nbsp; <span>Users</span></li></Link>
+          <Link to={'/admin_parcels'}><li><img src={parcels2} alt="" />&nbsp; <span>Parcels</span></li></Link>
+          <Link to={'/admin_orders'}><li><img src={stat} alt="" />&nbsp; <span>Orders</span></li></Link>
+          <Link to={'/admin_profile'}><li><img src={prof} alt="" />&nbsp; <span>My Profile</span></li></Link>
           <Link to={'/help'}><li><img src={help} alt="" />&nbsp; <span>Help</span></li></Link>{" "}
         </ul>
       </div>
@@ -80,7 +85,7 @@ function Parcels() {
           <div>
               <h1>PARCELS</h1>
               <div className="tableContainer">
-              <table className="styled-table">
+              <table>
                 <thead>
                   <tr>
                     <th>ID</th>
@@ -106,7 +111,7 @@ function Parcels() {
                       <td>{parcel.status}</td>
                       <td>{parcel.user_id}</td>
                       <td>
-                        <button onClick={() => handleViewDetails(parcel.id)}>View</button>
+                        <button onClick={() => handleViewDetails(parcel.id)} className="bttn">View</button>
                       </td>
                     </tr>
                   ))}

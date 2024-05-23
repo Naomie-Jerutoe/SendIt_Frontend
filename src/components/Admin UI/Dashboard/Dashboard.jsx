@@ -9,7 +9,11 @@ import users from "./users.png"
 import parcels from "./parcels.png"
 import notify from "./notifications.png"
 import home from "./home.png"
-
+import cargo from "./cargo.png"
+import musers from "./users2.png"
+import parcels2 from "./parcels2.png"
+import stat from "./status.png"
+import prof from "./profile.png"
 
 function Dashboard() {
   return (
@@ -20,10 +24,10 @@ function Dashboard() {
         </div>
         <ul>
           <Link to={'/admin_dashboard'}><li><img src={dash} alt="" />&nbsp; <span>Dashboard</span></li></Link>
-          <Link to={'/admin_users'}><li><img src="" alt="" />&nbsp; <span>Users</span></li></Link>
-          <Link to={'/admin_parcels'}><li><img src="" alt="" />&nbsp; <span>Parcels</span></li></Link>
-          <Link to={'/admin_orders'}><li><img src="" alt="" />&nbsp; <span>Orders</span></li></Link>
-          <Link to={'/admin_profile'}><li><img src="" alt="" />&nbsp; <span>My Profile</span></li></Link>
+          <Link to={'/admin_users'}><li><img src={musers} alt="" />&nbsp; <span>Users</span></li></Link>
+          <Link to={'/admin_parcels'}><li><img src={parcels2} alt="" />&nbsp; <span>Parcels</span></li></Link>
+          <Link to={'/admin_orders'}><li><img src={stat} alt="" />&nbsp; <span>Orders</span></li></Link>
+          <Link to={'/admin_profile'}><li><img src={prof} alt="" />&nbsp; <span>My Profile</span></li></Link>
           <Link to={'/help'}><li><img src={help} alt="" />&nbsp; <span>Help</span></li></Link>{" "}
         </ul>
       </div>

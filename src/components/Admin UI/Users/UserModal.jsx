@@ -56,9 +56,9 @@ const UserModal = ({ user, onClose }) => {
   };
 
   return (
-    <div className="center">
+    <div className="userscenter">
         <span className="close" onClick={onClose}>&times;</span>
-        <h2>Update User</h2>
+        <h3>Update User</h3>
         <form onSubmit={(e) => { e.preventDefault(); handleUpdate(); }}>
           <div className="inputbox">
             <label>
@@ -77,11 +77,11 @@ const UserModal = ({ user, onClose }) => {
             </label>
           </div>
           
-          <button type="submit" className='btn'>Submit</button>
+          <button type="submit" className='bttn'>Submit</button>
         </form>
-        <div>
-            <button className='btn2' onClick={handleMakeAdmin}>Make Admin</button>
-            <button className='btn2' onClick={handleDelete}>Delete User</button>
+        <div className="button-wrapper">
+            <button className='bttn' onClick={handleMakeAdmin}>Make Admin</button>
+            <button className='bttn' onClick={handleDelete}>Delete User</button>
         </div>
         
     </div>

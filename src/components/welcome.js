@@ -7,13 +7,13 @@ import './welcome.css'
 const Welcome = (props) => {
   return (
     <div className="welcome-container">
-      <h1 className="welcome-text">{props.welcome}</h1>
+      <h1 className="welcome-text">Welcome: {props.welcome}</h1>
     </div>
   )
 }
 
 Welcome.defaultProps = {
-  welcome: 'Welcome [Jane Doe]',
+  welcome: '[Jane Doe]',
 }
 
 Welcome.propTypes = {

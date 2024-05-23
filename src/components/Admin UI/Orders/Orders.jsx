@@ -2,6 +2,10 @@ import { Link } from "react-router-dom";
 import "./Orders.css";
 import help from "../Dashboard/help-web-button.png"
 import dash from "../Dashboard/dashboard (2).png"
+import musers from "../Dashboard/users2.png";
+import parcels2 from "../Dashboard/parcels2.png";
+import stat from "../Dashboard/status.png";
+import prof from "../Dashboard/profile.png";
 import { useState, useEffect } from "react";
 import OrderDetail from "./OrderDetail";
 
@@ -98,14 +102,14 @@ function Orders() {
         </div>
         <ul>
           <Link to={'/admin_dashboard'}><li><img src={dash} alt="" />&nbsp; <span>Dashboard</span></li></Link>
-          <Link to={'/admin_users'}><li><img src="" alt="" />&nbsp; <span>Users</span></li></Link>
-          <Link to={'/admin_parcels'}><li><img src="" alt="" />&nbsp; <span>Parcels</span></li></Link>
-          <Link to={'/admin_orders'}><li><img src="" alt="" />&nbsp; <span>Orders</span></li></Link>
+          <Link to={'/admin_users'}><li><img src={musers} alt="" />&nbsp; <span>Users</span></li></Link>
+          <Link to={'/admin_parcels'}><li><img src={parcels2} alt="" />&nbsp; <span>Parcels</span></li></Link>
+          <Link to={'/admin_orders'}><li><img src={stat} alt="" />&nbsp; <span>Orders</span></li></Link>
+          <Link to={'/admin_profile'}><li><img src={prof} alt="" />&nbsp; <span>My Profile</span></li></Link>
           <Link to={'/help'}><li><img src={help} alt="" />&nbsp; <span>Help</span></li></Link>{" "}
         </ul>
       </div>
       <div className="container">
-        <div>
           <h1>ORDERS</h1>
           <div className="center"> 
             <h3>Create Status Order</h3>
@@ -115,31 +119,29 @@ function Orders() {
                   type="text" 
                   required="required"
                   value={parcelId}
+                  placeholder="Enter the parcel_id.."
                   onChange={(e) => setParcelId(e.target.value)}
                   />
-              <span>Parcel Id</span>
             </div>
             <div className="inputbox">
               <input 
                   type="text" 
                   required="required" 
                   value={status}
+                  placeholder="Enter the Status.."
                   onChange={(e) => setStatus(e.target.value)} 
                   />
-              <span>Status</span>
             </div>
             <div className="inputbox">
-              <button>Submit</button>
+              <button className="bttn">Submit</button>
             </div>
           </form>
           {message && <p className="success-message">{message}</p>}
           {error && <p className="error-message">{error}</p>}
           </div>
-          <div>
-            <h2>All Orders</h2>
-            <div>
-            <div className="tableContainer">
-            <table className="styled-table">
+            <h1>ALL STATUS ORDERS: </h1>
+            <div className="ordertableContainer">
+            <table>
                 <thead>
                   <tr>
                     <th>ID</th>
@@ -155,19 +157,16 @@ function Orders() {
                       <td>{order.status}</td>
                       <td>{order.parcel_id}</td>
                       <td>
-                        <button onClick={()=>{handleViewDetails(order.id)}}>View</button>
+                        <button onClick={()=>{handleViewDetails(order.id)}} className="bttn">View</button>
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
-            <div>
+          <div className="ordercontent-3">
               {selectedOrder && <OrderDetail order={selectedOrder} onClose={handleCloseModal} />}
-            </div>
-            </div>
           </div>
-        </div>
       </div>
     </div>
   )
