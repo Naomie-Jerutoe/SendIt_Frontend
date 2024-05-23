@@ -22,7 +22,7 @@
     "zxcvbn": "^4.4.2"
   },
   "scripts": {
-    "start": "craco start",
+    "start":"PORT=4000 craco start",
     "build": "craco build",
     "test": "craco test --env=jsdom",
     "eject": "craco eject"
