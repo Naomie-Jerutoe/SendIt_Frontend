@@ -1,21 +1,49 @@
-import { Link } from "react-router-dom";
+import React from "react";
+import { Link, useHistory } from "react-router-dom";
+import axios from "axios";
 import "./Dashboard.css";
-import logo from "./user.png"
-import search from "./search.png"
-import dash from "./dashboard (2).png"
-import help from "./help-web-button.png"
-import income from "./income.png"
-import users from "./users.png"
-import parcels from "./parcels.png"
-import notify from "./notifications.png"
-import home from "./home.png"
-import cargo from "./cargo.png"
-import musers from "./users2.png"
-import parcels2 from "./parcels2.png"
-import stat from "./status.png"
-import prof from "./profile.png"
+import logo from "./user.png";
+import search from "./search.png";
+import dash from "./dashboard (2).png";
+import help from "./help-web-button.png";
+import income from "./income.png";
+import users from "./users.png";
+import parcels from "./parcels.png";
+import notify from "./notifications.png";
+import home from "./home.png";
+import cargo from "./cargo.png";
+import musers from "./users2.png";
+import parcels2 from "./parcels2.png";
+import stat from "./status.png";
+import prof from "./profile.png";
 
 function Dashboard() {
+  const history = useHistory();
+
+  const handleLogout = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        console.error('No token found in local storage');
+        return;
+      }
+
+      const response = await axios.get('https://sendit-backend-qhth.onrender.com/logout', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.status === 200) {
+        localStorage.removeItem('token');
+        console.log('Logged out successfully');
+        history.push('/'); // Redirect to home or login page after logout
+      }
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
+  };
+
   return (
     <div className="main">
       <div className="side-menu">
@@ -44,9 +72,9 @@ function Dashboard() {
               <div className="img-case">
                 <Link to={'/admin_profile'}><img src={logo} alt="" title="My profile"/></Link> 
               </div>
-              <Link to={'/logout'}><a href="#" className="btn" title="Logout">
+              <button onClick={handleLogout} className="btn" title="Logout">
                 Logout
-              </a></Link>
+              </button>
             </div>
           </div>
         </div>
