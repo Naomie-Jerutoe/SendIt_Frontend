@@ -45,9 +45,9 @@ function Dashboard() {
   };
 
   return (
-    <div className="main">
-      <div className="side-menu">
-        <div className="brand-name">
+    <div className="admin-main">
+      <div className="admin-side-menu">
+        <div className="admin-brand-name">
           <h1>SendIt</h1>
         </div>
         <ul>
@@ -59,14 +59,14 @@ function Dashboard() {
           <Link to={'/help'}><li><img src={help} alt="" />&nbsp; <span>Help</span></li></Link>{" "}
         </ul>
       </div>
-      <div className="container">
-        <div className="header">
-          <div className="nav">
-            <div className="search">
+      <div className="admin-container">
+        <div className="admin-header">
+          <div className="admin-nav">
+            <div className="admin-search">
               <input type="text" placeholder="Search.." />
               <button type="submit"><img src={search} alt="" /></button>
             </div>
-            <div className="user">
+            <div className="admin-user">
               <Link to={'/'}><img src={home} alt="" title="Go to home page" /></Link>
               
               <div className="img-case">
@@ -78,10 +78,10 @@ function Dashboard() {
             </div>
           </div>
         </div>
-        <div className="content">
-          <div className="cards">
-            <div className="card">
-              <div className="box">
+        <div className="admin-content">
+          <div className="admin-cards">
+            <div className="admin-card">
+              <div className="admin-box">
                 <h1>194</h1>
                 <h3>Users</h3>
               </div>
@@ -89,8 +89,8 @@ function Dashboard() {
                 <img src={users} alt="" />
               </div>
             </div>
-            <div className="card">
-              <div className="box">
+            <div className="admin-card">
+              <div className="admin-box">
                 <h1>53</h1>
                 <h3>Parcels</h3>
               </div>
@@ -98,8 +98,8 @@ function Dashboard() {
                 <img src={parcels} alt="" />
               </div>
             </div>
-            <div className="card">
-              <div className="box">
+            <div className="admin-card">
+              <div className="admin-box">
                 <h1>350000</h1>
                 <h3>Income</h3>
               </div>
@@ -108,9 +108,9 @@ function Dashboard() {
               </div>
             </div>
           </div>
-          <div className="content-2">
-            <div className="parcels">
-              <div className="title">
+          <div className="admin-content-2">
+            <div className="admin-parcels">
+              <div className="admin-title">
                 <h2>Parcels</h2>
                 <Link to={'/admin_parcels'}><a href="#" className="btn">
                   View All
@@ -166,8 +166,8 @@ function Dashboard() {
                 </tr>
               </table>
             </div>
-            <div className="orders">
-              <div className="title">
+            <div className="admin-orders">
+              <div className="admin-title">
                 <h2>Orders</h2>
                 <Link to={'/admin_orders'}><a href="#" className="btn">
                   View All

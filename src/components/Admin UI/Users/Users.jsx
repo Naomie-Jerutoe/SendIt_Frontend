@@ -46,9 +46,9 @@ function Users() {
   };
 
   return (
-    <div className="main">
-      <div className="side-menu">
-        <div className="brand-name">
+    <div className="admin-main">
+      <div className="admin-side-menu">
+        <div className="admin-brand-name">
           <h1>SendIt</h1>
         </div>
         <ul>
@@ -60,7 +60,7 @@ function Users() {
           <Link to={'/help'}><li><img src={help} alt="" />&nbsp; <span>Help</span></li></Link>{" "}
         </ul>
       </div>
-      <div className="container">
+      <div className="admin-container">
           <h1>USERS</h1>
           <div className="usersTableContainer">
               <table>
@@ -79,7 +79,7 @@ function Users() {
                       <td>{user.username}</td>
                       <td>{user.email}</td>
                       <td>
-                        <button onClick={() => handleView(user)} className="bttn">View</button>
+                        <button onClick={() => handleView(user)} className="admin-bttn">View</button>
                       </td>
                     </tr>
                   ))}

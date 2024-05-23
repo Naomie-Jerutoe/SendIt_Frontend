@@ -9,9 +9,9 @@ import prof from "../Dashboard/profile.png";
 
 function MyProfile() {
   return (
-    <div className="main">
-      <div className="side-menu">
-        <div className="brand-name">
+    <div className="admin-main">
+      <div className="admin-side-menu">
+        <div className="admin-brand-name">
           <h1>SendIt</h1>
         </div>
         <ul>
@@ -23,8 +23,8 @@ function MyProfile() {
           <Link to={'/help'}><li><img src={help} alt="" />&nbsp; <span>Help</span></li></Link>{" "}
         </ul>
       </div>
-      <div className="container">
-          <h1>PROFILE</h1>
+      <div className="admin-container">
+        <h1>Profile</h1>
       </div>
     </div>
 

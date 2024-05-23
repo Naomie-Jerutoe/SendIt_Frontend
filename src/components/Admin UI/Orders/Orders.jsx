@@ -95,9 +95,9 @@ function Orders() {
   };
 
   return (
-    <div className="main">
-      <div className="side-menu">
-        <div className="brand-name">
+    <div className="admin-main">
+      <div className="admin-side-menu">
+        <div className="admin-brand-name">
           <h1>SendIt</h1>
         </div>
         <ul>
@@ -109,12 +109,12 @@ function Orders() {
           <Link to={'/help'}><li><img src={help} alt="" />&nbsp; <span>Help</span></li></Link>{" "}
         </ul>
       </div>
-      <div className="container">
-          <h1>ORDERS</h1>
-          <div className="center"> 
+      <div className="admin-container">
+        <h1>ORDERS</h1>
+          <div className="admin-center"> 
             <h3>Create Status Order</h3>
             <form onSubmit={handleSubmit}>
-            <div className="inputbox">
+            <div className="admin-inputbox">
               <input 
                   type="text" 
                   required="required"
@@ -123,7 +123,7 @@ function Orders() {
                   onChange={(e) => setParcelId(e.target.value)}
                   />
             </div>
-            <div className="inputbox">
+            <div className="admin-inputbox">
               <input 
                   type="text" 
                   required="required" 
@@ -132,8 +132,8 @@ function Orders() {
                   onChange={(e) => setStatus(e.target.value)} 
                   />
             </div>
-            <div className="inputbox">
-              <button className="bttn">Submit</button>
+            <div className="admin-inputbox">
+              <button className="admin-bttn">Submit</button>
             </div>
           </form>
           {message && <p className="success-message">{message}</p>}
@@ -157,7 +157,7 @@ function Orders() {
                       <td>{order.status}</td>
                       <td>{order.parcel_id}</td>
                       <td>
-                        <button onClick={()=>{handleViewDetails(order.id)}} className="bttn">View</button>
+                        <button onClick={()=>{handleViewDetails(order.id)}} className="admin-bttn">View</button>
                       </td>
                     </tr>
                   ))}

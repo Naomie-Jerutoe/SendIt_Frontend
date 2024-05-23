@@ -31,13 +31,13 @@ function OrderDetail({order, onClose}) {
   };
 
   return (
-    <div className='order'>
+    <div className='admin-status-order'>
       <span className="close" onClick={onClose}>&times;</span>
       <h3>Order Details:</h3>
         <p>ID: {order.id}</p>
         <p>Status: {order.status}</p>
         <p>Parcel Id: {order.parcel_id}</p>
-        <button onClick={handleUpdateStatusClick} className='bttn'>Update Status</button>
+        <button onClick={handleUpdateStatusClick} className='admin-bttn'>Update Status</button>
         {showForm && (
         <form onSubmit={handleSubmit} className='my-form'>
           <label>
@@ -49,7 +49,7 @@ function OrderDetail({order, onClose}) {
               onChange={(e) => setNewStatus(e.target.value)}
             />
           </label>
-          <button type="submit" className='bttn'>Submit</button>
+          <button type="submit" className='admin-bttn'>Submit</button>
         </form>
       )}
     </div>
