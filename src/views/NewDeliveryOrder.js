@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
-import Navbar1 from '../components/navbar';
+import Navbar1 from '../components/navbar1';
 import Footer from '../components/footer';
 import './NewDeliveryOrder.css';
 

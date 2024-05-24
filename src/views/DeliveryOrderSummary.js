@@ -136,8 +136,13 @@ const DeliveryOrderSummary = () => {
               <li key={order.id} className="order-item">
                 <h3>Order #{order.id}</h3>
                   <div className="order-details">
+                    <div>
                 <p>Pickup Location: {order.pickup_location}</p>
                 <p>Destination: {order.destination}</p>
+                </div>
+                <div>
+                <p>Description: {order.description}</p>
+              </div>
                   </div>
                 {/* <p>Pickup Location: {order.pickup_location}</p> 
                 <p>Destination: {order.destination}</p><br />

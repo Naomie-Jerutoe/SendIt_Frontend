@@ -37,6 +37,11 @@
   margin-bottom: 20px;
   width: 700px;
   /* margin-top: 10px; */
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  border-radius: 20px;
+  text-align: center;
 }
 .order-item:hover {
   background-color: rgb(219, 197, 236);
@@ -68,9 +73,19 @@
   color: #fff;
 }
 .order-details {
+  display: inline-flex;
+  /* justify-content: space-between; */
+  flex-direction: column;
+  gap: 10px;
+  font-size: x-large;
+  align-items: center;
+}
+.order-details > div {
   display: flex;
   justify-content: space-between;
+  height: 50px;
 }
+
 .order-item h3 {
   margin-bottom: var(--dl-space-space-halfunit);
   text-align: center;
